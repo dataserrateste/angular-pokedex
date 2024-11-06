@@ -1,5 +1,6 @@
-div{
+.container {
     display: flex;
-    flex-direction: row;
-    
+    flex-wrap: wrap; /* Permite que os elementos quebrem para a próxima linha, se necessário */
 }
+
+

@@ -1,7 +1,9 @@
 <h1>PokeDex</h1>
+
 <div class="container">
-    <div class="card" *ngFor="let number of numbers">
+    <div class="card" *ngFor="let number of displayedImages">
         <app-poke-card index={{number}}></app-poke-card>
     </div>
 </div>
+<button (click)="loadMoreImages()" *ngIf="hasMoreImages">Carregar mais</button>
 <router-outlet></router-outlet>

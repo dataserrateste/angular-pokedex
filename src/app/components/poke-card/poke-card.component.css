@@ -1,7 +1,7 @@
 .pokecard__container {
-    width: 445px;
+    width: 400px;
     height: 200px;
-    margin: 10px;
+    margin: 5px;
     display: flex;
     flex-direction: row;
     background-color: rgb(192, 192, 192);
@@ -22,16 +22,16 @@
 
 .pokecard__info__title>h2 {
     color: rgb(56, 56, 56);
-    font-size: 27px;
+    font-size: 24px;
 }
 
 .pokecard__image {
     background-color: antiquewhite;
-    width: 35%;
+    width: 160px;
     margin: auto;
     margin-left: auto;
     margin-right: 20px;
-    height: 80%;
+    height: 160px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +49,7 @@
 }
 
 .pokecard__types > span > img {
-    width: 110px;
+    width: 80px;
     border-radius: 5px;
     margin-right: 10px;
     

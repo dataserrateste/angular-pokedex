@@ -7,20 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokedex';
-  numbers: number[] = Array.from({ length: 1025}, (_, i) => i + 1);
-
-  ngOnInit(): void { 
-    
-  }
-
-  
-
+  numbers: number[] = Array.from({ length: 1025 }, (_, i) => i + 1);
   displayedImages: number[] = [];
   imagesPerPage: number = 12;
   currentPage: number = 0;
 
   constructor() {
     this.loadMoreImages();
+  }
+
+  ngOnInit(): void {
+    // this.loadMoreImages();
   }
 
   get hasMoreImages(): boolean {
@@ -36,4 +33,10 @@ export class AppComponent {
     this.currentPage++;
   }
 
+  searchPokemon(n: number): void {
+    this.numbers = [n]
+    this.displayedImages = []
+    this.currentPage = 0;
+    this.loadMoreImages();
+  }
 }

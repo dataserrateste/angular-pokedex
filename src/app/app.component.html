@@ -1,5 +1,10 @@
 <h1>PokeDex</h1>
 
+<div>
+    <label for="filtro-pokemon">Nome: </label>
+    <input type="text" (input)="searchPokemon($any($event.target).value)" placeholder="Digite o nome do Pokémon">
+</div>
+
 <div class="container">
     <div class="card" *ngFor="let number of displayedImages">
         <app-poke-card index={{number}}></app-poke-card>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+// import { PokeCardComponent } from './components/poke-card/poke-card.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ export class AppComponent {
   displayedImages: number[] = [];
   imagesPerPage: number = 12;
   currentPage: number = 0;
+
+  // @ViewChild(PokeCardComponent) pokecardComponent!: PokeCardComponent;
 
   constructor() {
     this.loadMoreImages();
@@ -34,9 +37,23 @@ export class AppComponent {
   }
 
   searchPokemon(n: number): void {
+    console.log(n)
     this.numbers = [n]
     this.displayedImages = []
     this.currentPage = 0;
     this.loadMoreImages();
   }
+
+  // searchPokemon(name: string) {
+  //   this.pokecardComponent.getPokemon(name);
+  //   console.log(this.pokecardComponent.getPokemon(name))
+  //   // this.numbers = []
+  //   this.displayedImages = []
+  //   this.currentPage = 0;
+  //   this.loadMoreImages();
+    
+  // }
+
+
+
 }

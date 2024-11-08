@@ -3,6 +3,12 @@
 <div>
     <label for="filtro-pokemon">Nome: </label>
     <input type="text" (input)="searchPokemon($any($event.target).value)" placeholder="Digite o nome do Pokémon">
+    <!-- <input 
+    type="text" 
+    #pokemonInput 
+    placeholder="Digite o nome do Pokémon"
+>
+<button (click)="searchPokemon($any($event.target).pokemonInput.value)">Buscar</button> -->
 </div>
 
 <div class="container">

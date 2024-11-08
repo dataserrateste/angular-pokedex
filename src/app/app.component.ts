@@ -36,14 +36,30 @@ export class AppComponent {
     this.currentPage++;
   }
 
-  searchPokemon(n: number): void {
-    console.log(n)
-    this.numbers = [n]
-    this.displayedImages = []
-    this.currentPage = 0;
-    this.loadMoreImages();
+  searchPokemon(n?: number): void {
+    if (n === undefined) {
+      this.resetLoadPokemon(); // Reseta caso não haja termo de pesquisa
+    } else {
+      this.numbers = [n]; // Aplica a pesquisa
+      this.displayedImages = [];
+      this.currentPage = 0;
+      this.loadMoreImages();
+    }
+    
+    // this.numbers = [n]
+    // this.displayedImages = []
+    // this.currentPage = 0;
+    // this.loadMoreImages();
+    
+   
   }
 
+  resetLoadPokemon(): void {
+    this.numbers = Array.from({ length: 1025 }, (_, i) => i + 1); // Restaura todos os números
+    this.displayedImages = []; // Limpa as imagens exibidas
+    this.currentPage = 0; // Reinicia a contagem de páginas
+    this.loadMoreImages(); // Carrega as primeiras imagens novamente
+  }
   // searchPokemon(name: string) {
   //   this.pokecardComponent.getPokemon(name);
   //   console.log(this.pokecardComponent.getPokemon(name))

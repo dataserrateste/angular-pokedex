@@ -8,9 +8,10 @@
     border-radius: 10px;
     box-shadow: 4px 4px 4px rgb(112, 112, 112);
     border: 2px solid black;
-    background-image: radial-gradient(farthest-corner at 100px 200px,
-            rgb(241, 241, 241) 50%,
-            rgb(241, 0, 0) 60%);
+    background-image: radial-gradient(farthest-corner at 120px 220px,
+            rgb(241, 241, 241) 57%,
+            rgb(51, 51, 51) 58%,
+            rgb(241, 0, 0) 59%);
 }
 
 .pokecard__info {
@@ -19,7 +20,7 @@
     justify-content: flex-start;
 
     margin-left: 15px;
-    margin-top: 15px;
+    margin-top: 12px;
     margin-bottom: 20px;
 
 }
@@ -33,7 +34,7 @@
 .pokecard__info__title>h2 {
     color: rgb(56, 56, 56);
     font-size: 22px;
-    margin-bottom: 30px;
+    margin-bottom: 33px;
 }
 
 .pokecard__image {
@@ -49,7 +50,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 3px solid #333333;
 
     padding: 20px;
     /* Cria a "margem" entre as bordas interna e externa */

@@ -1,0 +1,12 @@
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+
+h1{
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 80px;
+    text-align: center;
+    color: #F6C206;
+    -webkit-text-stroke-width: 1px; /* largura da borda */
+    -webkit-text-stroke-color: #4161AD; /* cor da borda */
+    margin-top: -60px;
+    margin-bottom: -40px;
+}

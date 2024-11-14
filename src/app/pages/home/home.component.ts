@@ -16,43 +16,49 @@ export class HomeComponent {
   searchTerm: string = '';
 
 
-  constructor(private pokemonService: PokemonService) {
+  constructor(public pokemonService: PokemonService) {
     // this.loadMoreImages();
   }
 
   ngOnInit(): void {
-    this.loadMorePokemons();
+   this.pokemonService.loadMorePokemons(this.pokemons);
   }
 
-  get hasMorePokemons(): boolean {
-    return this.currentPage * this.pokemonsPerPage < this.pokemons.length;
+  onSearch(): void {
+    this.pokemonService.searchPokemon(this.searchTerm,this.pokemons);
   }
 
-  loadMorePokemons(): void {
-    const nextPagePokemons = this.pokemons.slice(
-      this.currentPage * this.pokemonsPerPage,
-      (this.currentPage + 1) * this.pokemonsPerPage
-    );
-    this.displayedPokemons = [...this.displayedPokemons, ...nextPagePokemons];
-    this.currentPage++;
-  }
+  // hasMorePokemons(poke:number[] ): boolean {
+  //   return this.currentPage * this.pokemonsPerPage < poke.length;
+  // }
 
-  searchPokemon() {
-    if (this.searchTerm) {
-      this.pokemonService.getPokemon(this.searchTerm.toLowerCase()).subscribe((pokemon) => {
-        console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
-        this.pokemons = [pokemon.id]; // Exibe o Pokémon buscado
-        this.displayedPokemons = [];
-        this.currentPage = 0;
-        this.loadMorePokemons();
-      });
-    } else {
-      this.pokemons = this.allPokemons
-      this.displayedPokemons = []; // Limpa as imagens exibidas
-      this.currentPage = 0; // Reinicia a contagem de páginas
-      this.loadMorePokemons();; // Se não houver busca, carrega todos os Pokémons
-    }
-  }
+  // loadMorePokemons(poke:number[] ): number[] {
+  //   let displayed: number[]=[]
+  //   const nextPagePokemons = poke.slice(
+  //     this.currentPage * this.pokemonsPerPage,
+  //     (this.currentPage + 1) * this.pokemonsPerPage
+  //   );
+  //   displayed = [...displayed, ...nextPagePokemons];
+  //   this.currentPage++;
+  //   return displayed
+  // }
+
+  // searchPokemon() {
+  //   if (this.searchTerm) {
+  //     this.pokemonService.getPokemon(this.searchTerm.toLowerCase()).subscribe((pokemon) => {
+  //       console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
+  //       this.pokemons = [pokemon.id]; // Exibe o Pokémon buscado
+  //       this.displayedPokemons = [];
+  //       this.currentPage = 0;
+  //       this.pokemonService.loadMorePokemons(this.pokemons);
+  //     });
+  //   } else {
+  //     this.pokemons = this.allPokemons
+  //     this.displayedPokemons = []; // Limpa as imagens exibidas
+  //     this.currentPage = 0; // Reinicia a contagem de páginas
+  //     this.pokemonService.loadMorePokemons(this.pokemons);; // Se não houver busca, carrega todos os Pokémons
+  //   }
+  // }
 
   // resetLoadPokemon(): void {
   //   this.numbers = this.allnumbers// Restaura todos os números

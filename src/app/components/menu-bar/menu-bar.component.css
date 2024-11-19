@@ -2,10 +2,10 @@
 
 .navbar{
     display: flex;
-    background-color:   rgb(241, 241, 241);
-    box-shadow: 4px 4px 4px rgb(112, 112, 112);
+    background-color:   #f1f1f1;
+    box-shadow: 4px 4px 4px #707070;
     height: 80px;
-    width: 1440px;
+    width: 1920px;
 } 
 
 .navbar__logo{
@@ -23,7 +23,7 @@
     margin-top: -20px;
     margin-bottom: -10px;
    
-    background-color: rgb(241, 0, 0);
+    background-color: #f10000;
 }
 
 .navbar__itens{
@@ -38,7 +38,7 @@
     display: flex;
     padding: 0px 80px;
     text-decoration: none;
-    color:rgb(56, 56, 56);
+    color:#383838;
     font-size: 30px;
     height: 100%;
    
@@ -48,6 +48,5 @@
 }
 
 .navbar__itens>a:hover{
-    border-bottom: 3px solid rgb(241, 0, 0);
+    border-bottom: 3px solid #f10000;
 }
-

@@ -15,6 +15,9 @@ import { ItensComponent } from './pages/itens/itens.component';
 import { BerriesComponent } from './pages/berries/berries.component';
 import { LocationComponent } from './pages/location/location.component';
 import { PokemonDetailsComponent } from './pages/pokemon-details/pokemon-details.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
+import { MoveCardComponent } from './components/move-card/move-card.component';
+import { MemoryGameComponent } from './components/memorygame/memorygame.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { PokemonDetailsComponent } from './pages/pokemon-details/pokemon-details
     ItensComponent,
     BerriesComponent,
     LocationComponent,
-    PokemonDetailsComponent
+    PokemonDetailsComponent,
+    ItemCardComponent,
+    MoveCardComponent,
+    MemoryGameComponent
   ],
   imports: [
     BrowserModule,

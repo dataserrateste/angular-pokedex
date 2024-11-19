@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, filter, forkJoin, map, Observable, of } from 'rxjs';
 import { PokemonData } from '../models/pokemonData'
 import { TypeData } from '../models/typeData';
 import { PokemonList } from '../models/pokemonList';
+import { ItemData } from '../models/itemData';
+import { MoveData } from '../models/moveData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,11 @@ export class PokemonService {
   private baseURL: string = ""
   private pokeData: PokemonData | any
   private typeData: TypeData | any
+  private itemData: ItemData | any
+  private moveData: MoveData | any
   private pokeList: PokemonList | any
-  displayedPokemons: number[] = [];
-  pokemonsPerPage: number = 12;
+  displayed: number[] = [];
+  objectsPerPage: number = 12;
   currentPage: number = 0;
   isSearching: boolean = false;
 
@@ -35,42 +39,109 @@ export class PokemonService {
   }
 
   getType(typeName: string): Observable<TypeData> {
-    this.pokeData = this.http.get<TypeData>(`${this.baseURL}type/${typeName}`)
+    this.typeData = this.http.get<TypeData>(`${this.baseURL}type/${typeName}`)
 
-    return this.pokeData
+    return this.typeData
   }
 
-  hasMorePokemons(poke:number[] ): boolean {
-    return this.currentPage * this.pokemonsPerPage < poke.length;
+  getItem(itemName: string): Observable<ItemData> {
+    this.itemData = this.http.get<ItemData>(`${this.baseURL}item/${itemName}`)
+
+    return this.itemData
   }
 
-  loadMorePokemons(poke:number[] ){
-    const nextPagePokemons = poke.slice(
-      this.currentPage * this.pokemonsPerPage,
-      (this.currentPage + 1) * this.pokemonsPerPage
+  getMove(moveName: string): Observable<MoveData> {
+    this.moveData = this.http.get<MoveData>(`${this.baseURL}move/${moveName}`)
+
+    return this.moveData
+  }
+   
+  hasMore(object: number[]): boolean {
+    return this.currentPage * this.objectsPerPage < object.length;
+  }
+
+  // loadMore(object: number[]) {
+  //   const nextPageObjects = object.slice(
+  //     this.currentPage * this.objectsPerPage,
+  //     (this.currentPage + 1) * this.objectsPerPage
+  //   );
+  //   this.displayed = [...this.displayed, ...nextPageObjects];
+  //   this.currentPage++;
+  // }
+
+  loadMore(object: number[]) {
+    const nextPageObjects = object.slice(
+      this.currentPage * this.objectsPerPage,
+      (this.currentPage + 1) * this.objectsPerPage
     );
-    this.displayedPokemons = [...this.displayedPokemons, ...nextPagePokemons];
-    this.currentPage++;
+
+    const checkObservables = nextPageObjects.map(id => 
+      this.checkItemExistence(id).pipe(
+        map(exists => exists ? id : null) // Se existir, retorna o ID, senão retorna null
+      )
+    );
+  
+    // Usa forkJoin para aguardar todas as verificações de existência
+    forkJoin(checkObservables).subscribe(validItems => {
+      // Filtra os itens válidos (não nulos)
+      const validObjects = validItems.filter(id => id !== null);
+      this.displayed = [...this.displayed, ...validObjects];
+      this.currentPage++;
+    });
   }
 
-  searchPokemon(searchTerm:string, poke:number[]) {
-    let pokemons: number[]=poke
+  checkItemExistence(id: number) {
+    // Retorna um Observable que verifica se o item existe
+    return this.http.get<ItemData>(`${this.baseURL}item/${id}`).pipe(
+      map(() => true), // Se a requisição for bem-sucedida, o item existe
+      catchError(() => of(false)) // Se der erro (ex.: 404), o item não existe
+    );
+  }
+
+
+  search(searchTerm: string, object: number[], tipo: number) {
+    let objects: number[] = object
     if (searchTerm) {
       this.isSearching = true;
-      this.getPokemon(searchTerm.toLowerCase()).subscribe((pokemon) => {
-        console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
-        pokemons = [pokemon.id]; // Exibe o Pokémon buscado
-        this.displayedPokemons = [];
-        this.currentPage = 0;
-        this.loadMorePokemons(pokemons);
-      });
+      if (tipo === 1) {
+        this.getPokemon(searchTerm.toLowerCase()).subscribe((pokemon) => {
+          objects = [pokemon.id]; // Exibe o Pokémon buscado
+          this.displayed = [];
+          this.currentPage = 0;
+          this.loadMore(objects);
+        });
+      }
+      if (tipo === 2) {
+        this.getItem(searchTerm.toLowerCase()).subscribe((item) => {
+          objects = [item.id]; // Exibe o Pokémon buscado
+          this.displayed = [];
+          this.currentPage = 0;
+          this.loadMore(objects);
+        });
+      }
+      if (tipo === 3) {
+        this.getMove(searchTerm.toLowerCase()).subscribe((move) => {
+          objects = [move.id]; // Exibe o Pokémon buscado
+          this.displayed = [];
+          this.currentPage = 0;
+          this.loadMore(objects);
+        });
+      }
+
     } else {
       this.isSearching = false;
-      pokemons = poke
-      this.displayedPokemons = []; // Limpa as imagens exibidas
+      objects = object
+      this.displayed = []; // Limpa as imagens exibidas
       this.currentPage = 0; // Reinicia a contagem de páginas
-      this.loadMorePokemons(poke);; // Se não houver busca, carrega todos os Pokémons
+      this.loadMore(object);; // Se não houver busca, carrega todos os Pokémons
     }
+  }
+
+  resetPages() {
+    this.displayed = [];
+    this.objectsPerPage = 12;
+    this.currentPage = 0;
+    this.isSearching = false;
   }
 
 }

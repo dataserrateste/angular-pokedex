@@ -65,7 +65,7 @@ export class MoveCardComponent {
             power: res.power,
             accuracy: res.accuracy,
             pp: res.pp,
-            effect_entries: res.effect_entries,
+            effect_entries: res.effect_entries[0] ? res.effect_entries : [{ effect: 'No effect available', short_effect: 'No effect available' }],
             type: res.type
           }
           this.getType(this.getTypeName()); // Chama getType com os nomes dos tipos
@@ -73,7 +73,8 @@ export class MoveCardComponent {
         error: (err) => console.log('not found')
       }
     )
-   
+  
+
   }
 
   getType(searchName: string): void {

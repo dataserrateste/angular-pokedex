@@ -22,6 +22,7 @@ export class PokemonService {
   objectsPerPage: number = 12;
   currentPage: number = 0;
   isSearching: boolean = false;
+  isLoading: boolean = false;
 
 
   constructor(private http: HttpClient) {
@@ -70,6 +71,10 @@ export class PokemonService {
   // }
 
   loadMore(object: number[], type: 'pokemon' | 'item' | 'move') {
+    if (this.isLoading) return;
+    
+    this.isLoading = true;
+
     const nextPageObjects = object.slice(
       this.currentPage * this.objectsPerPage,
       (this.currentPage + 1) * this.objectsPerPage
@@ -87,6 +92,7 @@ export class PokemonService {
       const validObjects = validItems.filter(id => id !== null);
       this.displayed = [...this.displayed, ...validObjects];
       this.currentPage++;
+      this.isLoading = false;
     });
   }
 

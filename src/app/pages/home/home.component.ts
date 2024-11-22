@@ -30,6 +30,16 @@ export class HomeComponent {
     this.pokemonService.search(this.searchTerm, this.pokemons, 1);
   }
 
+
+  onScroll(): void {
+    const scrollPosition = window.pageYOffset + window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPercentage = (scrollPosition / documentHeight) * 100;
+  
+    if (scrollPercentage > 98 && !this.pokemonService.isSearching && this.pokemonService.hasMore(this.pokemons) && !this.pokemonService.isLoading) {
+      this.pokemonService.loadMore(this.pokemons,'pokemon')
+    }
+  }
   // hasMorePokemons(poke:number[] ): boolean {
   //   return this.currentPage * this.pokemonsPerPage < poke.length;
   // }

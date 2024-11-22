@@ -1,7 +1,7 @@
 <div class="menu-container">
     
 </div>
-<div class="container">
+<div class="container" (window:scroll)="pokemonService.onScroll(moves, 'move')">
     <div class="card__search__move">
         <label for="filtro-move">Nome: </label>
         <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,moves,3)" placeholder="Pesquisar Move">

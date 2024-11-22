@@ -10,9 +10,9 @@ export class HomeComponent {
   title = 'pokedex';
   allPokemons: number[] = Array.from({ length: 1025 }, (_, i) => i + 1);
   pokemons: number[] = this.allPokemons
-  displayedPokemons: number[] = [];
-  pokemonsPerPage: number = 12;
-  currentPage: number = 0;
+  // displayedPokemons: number[] = [];
+  // pokemonsPerPage: number = 12;
+  // currentPage: number = 0;
   searchTerm: string = '';
 
 
@@ -22,7 +22,6 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-
     this.pokemonService.loadMore(this.pokemons,'pokemon');
   }
 

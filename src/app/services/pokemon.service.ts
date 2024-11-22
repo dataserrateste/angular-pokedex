@@ -19,10 +19,9 @@ export class PokemonService {
   private moveData: MoveData | any
   private pokeList: PokemonList | any
   displayed: number[] = [];
-  objectsPerPage: number = 12;
+  objectsPerPage: number = 24;
   currentPage: number = 0;
   isSearching: boolean = false;
-  isLoading: boolean = false;
 
 
   constructor(private http: HttpClient) {
@@ -71,10 +70,6 @@ export class PokemonService {
   // }
 
   loadMore(object: number[], type: 'pokemon' | 'item' | 'move') {
-    if (this.isLoading) return;
-    
-    this.isLoading = true;
-
     const nextPageObjects = object.slice(
       this.currentPage * this.objectsPerPage,
       (this.currentPage + 1) * this.objectsPerPage
@@ -167,9 +162,19 @@ export class PokemonService {
 
   resetPages() {
     this.displayed = [];
-    this.objectsPerPage = 12;
+    this.objectsPerPage = 24;
     this.currentPage = 0;
     this.isSearching = false;
   }
 
+  onScroll(n:number[], t: 'pokemon' | 'item' | 'move') {
+    const scrollPosition = window.pageYOffset + window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPercentage = (scrollPosition / documentHeight) * 100;
+  
+    if (scrollPercentage > 98 && !this.isLoading && !this.isSearching && this.hasMore(n)) {
+      this.isLoading = true;
+      this.loadMore(n,t);
+    }
+  }
 }

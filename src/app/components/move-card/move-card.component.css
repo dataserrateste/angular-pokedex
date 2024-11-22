@@ -51,9 +51,10 @@
    
 }
 
-.movecard__info__stats>h5 {
+.movecard__info__effect>h5 {
     color: #383838;
-    width: 200px;
+    width: 1000px;
+    
   
 }
 

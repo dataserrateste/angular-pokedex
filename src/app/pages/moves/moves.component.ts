@@ -11,9 +11,6 @@ export class MovesComponent {
   title = 'pokedex';
   allmoves: number[] = Array.from({ length: 937 }, (_, i) => i + 1);
   moves: number[] = this.allmoves
-  // displayedPokemons: number[] = [];
-  // pokemonsPerPage: number = 12;
-  // currentPage: number = 0;
   searchTerm: string = '';
 
 

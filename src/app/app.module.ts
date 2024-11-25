@@ -18,6 +18,8 @@ import { PokemonDetailsComponent } from './pages/pokemon-details/pokemon-details
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { MoveCardComponent } from './components/move-card/move-card.component';
 import { MemoryGameComponent } from './components/memorygame/memorygame.component';
+import { MemorygameComponent } from './pages/memorygame/memorygame.component';
+
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { MemoryGameComponent } from './components/memorygame/memorygame.componen
     PokemonDetailsComponent,
     ItemCardComponent,
     MoveCardComponent,
-    MemoryGameComponent
+    MemoryGameComponent,
+    MemorygameComponent
   ],
   imports: [
     BrowserModule,

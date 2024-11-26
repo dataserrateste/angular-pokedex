@@ -28,6 +28,8 @@ export class MemoryGameComponent implements OnInit {
   timerInterval: any; // Identificador do intervalo do timer
   gameOver: boolean = false;
   status: string = '';
+  status1: string = '0';
+  pontos: number = 0;
 
   constructor(private service: PokemonService) {
     this.pokemon = {
@@ -94,12 +96,14 @@ export class MemoryGameComponent implements OnInit {
     clearInterval(this.timerInterval); // Garante que o intervalo antigo seja limpo
 
     this.status = 'jogando';
+    this.status1 = '0';
 
     this.gerarPokemonsAleatorios();
     
   }
 
   iniciarGame(){
+    this.status1 = '1';
     this.startTimer(); 
   }
 
@@ -115,6 +119,7 @@ export class MemoryGameComponent implements OnInit {
   }
 
   handleClick(card: Card) {
+    if(this.status1 == '1'){
     if (card.open || this.openCards.length === 2 || card.matched) {
       return;
     }
@@ -125,6 +130,7 @@ export class MemoryGameComponent implements OnInit {
     if (this.openCards.length === 2) {
       setTimeout(() => this.checkMatch(), 500);
     }
+    }
   }
 
   checkMatch() {
@@ -133,6 +139,7 @@ export class MemoryGameComponent implements OnInit {
     if (card1.emoji === card2.emoji) {
       card1.matched = true;
       card2.matched = true;
+      this.pontos = this.pontos + 10;
     } else {
       card1.open = false;
       card2.open = false;

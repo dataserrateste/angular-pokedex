@@ -1,7 +1,8 @@
 <div class="container">
   <h2>JOGO DA MEMÓRIA</h2>
   <div class="timer">
-    <p>Tempo restante: {{ timer }} segundos</p>
+    <p>Tempo: {{ timer }} segundos</p>
+    <p>Pontuação: {{ pontos }}</p>
   </div>
   <div class="game" *ngIf="status=='jogando'">
     <div *ngFor="let card of shuffledEmojis; let i = index" 
@@ -14,7 +15,7 @@
     </div>
   </div>
   <div class="container__button">
-    <button class="reset" (click)="iniciarGame()">INICIAR GAME</button>
+    <button class="reset" *ngIf="status1=='0'" (click)="iniciarGame()">INICIAR GAME</button>
     <button class="reset" (click)="resetGame()">RESET GAME</button>
   </div>
 </div>

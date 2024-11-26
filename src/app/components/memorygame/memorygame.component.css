@@ -67,6 +67,17 @@ h2 {
   perspective: 500px;
 }
 
+.timer{
+  width: 650px;
+  display: flex;
+  justify-content: space-between;
+
+  font-family: 'Pokemon Solid', sans-serif;
+  font-size: 1em;
+  /* color: #383838; */
+  text-transform: uppercase;
+}
+
 .item {
   position: relative;
   width: 100px;

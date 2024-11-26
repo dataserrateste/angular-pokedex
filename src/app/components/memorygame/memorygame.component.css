@@ -29,7 +29,12 @@ h2 {
  
 }
 
-.reset {
+.container__button{
+  display: flex;
+  gap: 10px;
+}
+
+.container__button .reset {
   padding: 15px 20px;
   width: 430px;
   color: #f10000;

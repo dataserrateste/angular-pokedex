@@ -3,7 +3,7 @@
   <div class="timer">
     <p>Tempo restante: {{ timer }} segundos</p>
   </div>
-  <div class="game">
+  <div class="game" *ngIf="status=='jogando'">
     <div *ngFor="let card of shuffledEmojis; let i = index" 
          class="item" 
          [class.boxOpen]="card.open"
@@ -13,5 +13,8 @@
       <img src="{{ card.emoji }}" alt="" srcset="">
     </div>
   </div>
-  <button class="reset" (click)="resetGame()">RESET GAME</button>
+  <div class="container__button">
+    <button class="reset" (click)="iniciarGame()">INICIAR GAME</button>
+    <button class="reset" (click)="resetGame()">RESET GAME</button>
+  </div>
 </div>

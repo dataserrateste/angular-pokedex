@@ -27,6 +27,7 @@ export class MemoryGameComponent implements OnInit {
   timer: number = 60; // Tempo total do jogo em segundos
   timerInterval: any; // Identificador do intervalo do timer
   gameOver: boolean = false;
+  status: string = '';
 
   constructor(private service: PokemonService) {
     this.pokemon = {
@@ -47,7 +48,6 @@ export class MemoryGameComponent implements OnInit {
   ngOnInit() {
     this.resetGame();
   }
-
 
   gerarPokemonsAleatorios() {
     const numerosAleatorios: number[] = [];
@@ -93,8 +93,13 @@ export class MemoryGameComponent implements OnInit {
 
     clearInterval(this.timerInterval); // Garante que o intervalo antigo seja limpo
 
-    this.gerarPokemonsAleatorios();
+    this.status = 'jogando';
 
+    this.gerarPokemonsAleatorios();
+    
+  }
+
+  iniciarGame(){
     this.startTimer(); 
   }
 

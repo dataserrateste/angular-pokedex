@@ -1,21 +1,28 @@
 <div class="container">
-  <h2>JOGO DA MEMÓRIA</h2>
-  <div class="timer">
-    <p>Tempo: {{ timer }} segundos</p>
-    <p>Pontuação: {{ pontos }}</p>
-  </div>
-  <div class="game" *ngIf="status=='jogando'">
-    <div *ngFor="let card of shuffledEmojis; let i = index" 
-         class="item" 
-         [class.boxOpen]="card.open"
-         [class.boxMatch]="card.matched" 
-         (click)="handleClick(card)">
-      <!-- {{ card.emoji }} -->
-      <img src="{{ card.emoji }}" alt="" srcset="">
+  <div class="container__info">
+    <h2>JOGO DA MEMÓRIA</h2>
+    <div class="timer">
+      <p>Tempo</p>
+      <p class="timer__cor"> {{ timer }}</p>
+      <br>
+      <p>Pontos</p>
+      <p class="timer__cor"> {{ pontos }}</p>
+    </div>
+    <div class="container__button">
+      <button class="start" [disabled]="isPlaying" (click)="iniciarGame()">START GAME</button>
+      <button class="reset" (click)="resetGame()">RESET GAME</button>
     </div>
   </div>
-  <div class="container__button">
-    <button class="reset" *ngIf="status1=='0'" (click)="iniciarGame()">INICIAR GAME</button>
-    <button class="reset" (click)="resetGame()">RESET GAME</button>
+  <div class="container__game">
+    <div class="game" *ngIf="!gameOver">
+      <div *ngFor="let card of shuffledEmojis; let i = index" class="item" [class.boxOpen]="card.open"
+        [class.boxMatch]="card.matched" (click)="handleClick(card)">
+        <!-- {{ card.emoji }} -->
+        <img src="{{ card.emoji }}" alt="" srcset="">
+      </div>
+    </div>
+    <div class="resultado" *ngIf="gameOver">
+      <p>{{ resultado }}</p>
+    </div>
   </div>
 </div>

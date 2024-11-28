@@ -27,9 +27,9 @@ export class MemoryGameComponent implements OnInit {
   timer: number = 60; // Tempo total do jogo em segundos
   timerInterval: any; // Identificador do intervalo do timer
   gameOver: boolean = false;
-  status: string = '';
-  status1: string = '0';
+  isPlaying: boolean = false;
   pontos: number = 0;
+  resultado: string = '';
 
   constructor(private service: PokemonService) {
     this.pokemon = {
@@ -93,17 +93,18 @@ export class MemoryGameComponent implements OnInit {
     this.timer = 60; // Reinicia o timer
     this.gameOver = false;
 
+    this.pontos = 0;
+
     clearInterval(this.timerInterval); // Garante que o intervalo antigo seja limpo
 
-    this.status = 'jogando';
-    this.status1 = '0';
+    this.isPlaying = false;
 
     this.gerarPokemonsAleatorios();
     
   }
 
   iniciarGame(){
-    this.status1 = '1';
+    this.isPlaying = true;
     this.startTimer(); 
   }
 
@@ -119,7 +120,7 @@ export class MemoryGameComponent implements OnInit {
   }
 
   handleClick(card: Card) {
-    if(this.status1 == '1'){
+    if(this.isPlaying){
     if (card.open || this.openCards.length === 2 || card.matched) {
       return;
     }
@@ -150,7 +151,7 @@ export class MemoryGameComponent implements OnInit {
     if (this.shuffledEmojis.every(card => card.matched)) {
       // alert('Você venceu!');
       clearInterval(this.timerInterval); // Para o timer se vencer
-      alert('Parabéns! Você venceu!');
+      this.resultado = 'Parabéns! Você venceu!';
       this.gameOver = true;
     }
   }
@@ -161,8 +162,8 @@ export class MemoryGameComponent implements OnInit {
 
       if (this.timer <= 0) {
         clearInterval(this.timerInterval); // Para o timer ao final
-        this.gameOver = true;
-        alert('Game Over! O tempo acabou.');
+        this.resultado = 'Game Over! O tempo acabou.';
+        this.gameOver = true
       }
     }, 1000);
   }

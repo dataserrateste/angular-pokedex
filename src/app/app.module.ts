@@ -18,7 +18,7 @@ import { PokemonDetailsComponent } from './pages/pokemon-details/pokemon-details
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { MoveCardComponent } from './components/move-card/move-card.component';
 import { MemoryGameComponent } from './components/memorygame/memorygame.component';
-import { MemorygameComponent } from './pages/memorygame/memorygame.component';
+import { GameComponent } from './pages/game/game.component';
 
 
 
@@ -37,7 +37,7 @@ import { MemorygameComponent } from './pages/memorygame/memorygame.component';
     ItemCardComponent,
     MoveCardComponent,
     MemoryGameComponent,
-    MemorygameComponent
+    GameComponent
   ],
   imports: [
     BrowserModule,

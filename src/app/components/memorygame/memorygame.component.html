@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="container__info">
+  <!-- <div class="container__info">
     <h2>JOGO DA MEMÓRIA</h2>
     <div class="timer">
       <p>Tempo</p>
@@ -33,7 +33,16 @@
         <p>RESET</p>
       </div>
     </div>
-  </div>
+  </div> -->
+  <app-menu-game
+    tituloGame="JOGO DA MEMÓRIA"
+    [isPlaying]="isPlaying"
+    [pontos]="pontos"
+    [timer]="timer"
+    (onIniciarGame)="iniciarGame()"
+    (onResetGame)="resetGame()"
+    (onOptionClicked)="onOptionSelected($event)"
+  ></app-menu-game>
   <div class="container__game">
     <div class="game" *ngIf="!gameOver">
       <div *ngFor="let card of shuffledEmojis; let i = index" class="item" [class.boxOpen]="card.open"

@@ -152,6 +152,7 @@ export class MemoryGameComponent implements OnInit {
     if (this.shuffledEmojis.every(card => card.matched)) {
       // alert('Você venceu!');
       clearInterval(this.timerInterval); // Para o timer se vencer
+      this.pontos = this.pontos * this.timer;
       this.resultado = 'Parabéns! Você venceu!';
       this.gameOver = true;
     }
@@ -171,7 +172,13 @@ export class MemoryGameComponent implements OnInit {
 
   onOptionSelected(event: Event): void {
     const value = (event.target as HTMLInputElement).value; // Captura o valor como string
-    this.selectedValue = parseInt(value, 10); // Converte o valor para número e atribui à variável
+    if(value == 'D')
+      this.selectedValue = 16;
+    else if(value == 'N')
+      this.selectedValue = 12;
+    else  
+      this.selectedValue = 8;
+    
     this.resetGame();
   }
 }

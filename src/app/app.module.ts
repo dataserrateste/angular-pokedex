@@ -20,6 +20,7 @@ import { MoveCardComponent } from './components/move-card/move-card.component';
 import { MemoryGameComponent } from './components/memorygame/memorygame.component';
 import { GameComponent } from './pages/game/game.component';
 import { CatchgameComponent } from './components/catchgame/catchgame.component';
+import { MenuGameComponent } from './components/menu-game/menu-game.component';
 
 
 
@@ -39,7 +40,8 @@ import { CatchgameComponent } from './components/catchgame/catchgame.component';
     MoveCardComponent,
     MemoryGameComponent,
     GameComponent,
-    CatchgameComponent
+    CatchgameComponent,
+    MenuGameComponent
   ],
   imports: [
     BrowserModule,

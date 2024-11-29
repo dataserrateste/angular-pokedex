@@ -9,8 +9,14 @@
       <p class="timer__cor"> {{ pontos }}</p>
     </div>
     <div class="container__button">
-      <button class="start" [disabled]="isPlaying" (click)="iniciarGame()">START GAME</button>
-      <button class="reset" (click)="resetGame()">RESET GAME</button>
+      <div class="container__button__position">
+        <button class="start" [disabled]="isPlaying" (click)="iniciarGame()"></button>
+        <p>START</p>
+      </div>
+      <div class="container__button__position">
+        <button class="reset" (click)="resetGame()"></button>
+        <p>RESET</p>
+      </div>
     </div>
   </div>
   <div class="container__game">

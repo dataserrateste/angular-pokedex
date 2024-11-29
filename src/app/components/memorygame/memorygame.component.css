@@ -56,44 +56,92 @@ h2 {
 
 .container__button{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 10px;
+
+
+  position:relative;
+  margin:20px;
 }
 
-.container__button > button {
-  padding: 10px 15px;
-  width: 200px;
-  color: #f10000;
-  background-color: #f1f1f1;
-  border: none;
+.container__button > .container__button__position > button{
+  background-color:#b40c8a;
+  display:block;
+  position:relative;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  border: 2px solid #7c0c60;
+  
+  -webkit-box-shadow:inset 1.5px 2px 0 #ffdaf6, 0 5px 0 #310125;
+  -moz-box-shadow:inset 1.5px 2px 0 #ffdaf6, 0 5px 0 #310125;
+  box-shadow:inset 1.5px 2px 0 #ffdaf6, 0 5px 0 #310125;
+  
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.container__button > .container__button__position > .reset:active{
+  top:5px;
+  background-color:#7c0c60;
+  
+  -webkit-box-shadow:inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+  -moz-box-shadow:inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+  box-shadow:inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+}
+
+.container__button > .container__button__position > .start:disabled{
+  top:5px;
+  background-color:#7c0c60;
+  
+  -webkit-box-shadow:inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+  -moz-box-shadow:inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+  box-shadow:inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+}
+
+
+/* .container__button > .container__button__position > button {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: #b61c8f;
   font-size: 1.4em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 4px 4px 4px #707070;
+  border-radius: 50%;
+
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  filter: dropshadow(color=#000, offx=0px, offy=1px);
+  
+  -webkit-box-shadow:inset 0 1px 0 #FFE5C4, 0 4px 0 #707070;
+  -moz-box-shadow:inset 0 1px 0 #FFE5C4, 0 4px 0 #707070;
+  box-shadow:inset 0 1px 0 #FFE5C4, 0 4px 0 #707070;
 }
 
-.container__button > button:hover {
-  color: #f1f1f1;
-  background-color: #f10000;
-}
+.container__button > .container__button__position > button:hover {
+  background-color: #9c127a;
+  transform: translateY(1px);
+  box-shadow: 0 4px #383838;
 
-.container__button > .start{
-  padding: 15px 20px;
-  width: 250px;
 }
 
 .container__button > .start:disabled {
-  background-color: #ccc; /* Cor do botão desativado */
-  color: #666;           /* Cor do texto desativado */
-  cursor: not-allowed;   /* Cursor indicando estado desativado */
-}
-/* .reset:focus {
-  color: #ec38bc;
-  background-color: #262809;
+  background-color: #ccc;
+  color: #666;           
+  cursor: not-allowed;   
 } */
+
+.container__button > .container__button__position{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 15px;
+}
 
 .game {
   width: max-content;

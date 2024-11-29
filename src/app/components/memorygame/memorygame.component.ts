@@ -52,7 +52,7 @@ export class MemoryGameComponent implements OnInit {
     this.resetGame();
   }
 
-  gerarPokemonsAleatorios(n:number) {
+  gerarPokemonsAleatorios(n: number) {
     const numerosAleatorios: number[] = [];
 
     while (numerosAleatorios.length < n) {
@@ -101,12 +101,12 @@ export class MemoryGameComponent implements OnInit {
     this.isPlaying = false;
 
     this.gerarPokemonsAleatorios(this.selectedValue);
-    
+
   }
 
-  iniciarGame(){
+  iniciarGame() {
     this.isPlaying = true;
-    this.startTimer(); 
+    this.startTimer();
   }
 
   shuffleCards(): Card[] {
@@ -121,17 +121,17 @@ export class MemoryGameComponent implements OnInit {
   }
 
   handleClick(card: Card) {
-    if(this.isPlaying){
-    if (card.open || this.openCards.length === 2 || card.matched) {
-      return;
-    }
+    if (this.isPlaying) {
+      if (card.open || this.openCards.length === 2 || card.matched) {
+        return;
+      }
 
-    card.open = true;
-    this.openCards.push(card);
+      card.open = true;
+      this.openCards.push(card);
 
-    if (this.openCards.length === 2) {
-      setTimeout(() => this.checkMatch(), 500);
-    }
+      if (this.openCards.length === 2) {
+        setTimeout(() => this.checkMatch(), 500);
+      }
     }
   }
 

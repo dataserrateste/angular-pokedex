@@ -21,22 +21,6 @@
   padding: 40px 0px;
 }
 
-.container__info {
-  width: 32%;
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  justify-content: flex-start;
-  align-items: center;
-  border: 5px solid #383838;
-  border-radius: 15px;
-  border-bottom-right-radius: 80px;
-  padding: 20px;
-  padding-bottom: 50px;
-  /* /* background-color: #d3d1d0; */
-  background: linear-gradient(149deg, #fafafa 0%, #ededed 3%, #dfdddc 20%, #939090 50%, #bfbfbf 80%, #b0b0b0 97%, #ededed 100%);
-}
-
 .container__game {
   width: 68%;
   display: flex;
@@ -114,6 +98,21 @@ h2 {
   margin-bottom: 30px;
 
 }
+
+/* .container__info {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  justify-content: flex-start;
+  align-items: center;
+  border: 5px solid #383838;
+  border-radius: 15px;
+  border-bottom-right-radius: 80px;
+  padding: 20px;
+  padding-bottom: 50px;
+  background: linear-gradient(149deg, #fafafa 0%, #ededed 3%, #dfdddc 20%, #939090 50%, #bfbfbf 80%, #b0b0b0 97%, #ededed 100%);
+} 
 
 .container__button {
   display: flex;

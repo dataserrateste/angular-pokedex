@@ -14,6 +14,15 @@
       </div>
     </div>
   
+    <app-menu-game
+    tituloGame="JOGO DA MEMÓRIA"
+    [isPlaying]="true"
+    [pontos]="score"
+    [timer]="currentTime"
+    (onIniciarGame)="startGame()"
+    (onResetGame)="startGame()"
+  ></app-menu-game>
+
     <div class="panel">
       <div class="panel-row" *ngFor="let row of rows">
         <div

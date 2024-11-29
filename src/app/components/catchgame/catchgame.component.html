@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="menu">
+      <div class="menu-time">
+        <h2 style="color: red;">Time Left</h2>
+        <h2 id="time-left">{{ currentTime }}</h2>
+      </div>
+      <div class="menu-score">
+        <h2 style="color: red;">Your Score</h2>
+        <h2 id="score">{{ score }}</h2>
+      </div>
+      <div class="menu-lives">
+        <img src="../../../assets/images/player.png" alt="foto do jogador" height="60px" />
+        <h2>x3</h2>
+      </div>
+    </div>
+  
+    <div class="panel">
+      <div class="panel-row" *ngFor="let row of rows">
+        <div
+          class="square"
+          [ngClass]="{ enemy: hitPosition == square.id }"
+          *ngFor="let square of row"
+          (mousedown)="checkHit(square.id)"
+        ></div>
+      </div>
+    </div>
+  </div>
+  

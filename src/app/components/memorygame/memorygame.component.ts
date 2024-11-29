@@ -99,7 +99,7 @@ export class MemoryGameComponent implements OnInit {
 
     this.isPlaying = false;
 
-    this.gerarPokemonsAleatorios(8);
+    this.gerarPokemonsAleatorios(16);
     
   }
 

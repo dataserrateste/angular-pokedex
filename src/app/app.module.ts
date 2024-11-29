@@ -19,6 +19,7 @@ import { ItemCardComponent } from './components/item-card/item-card.component';
 import { MoveCardComponent } from './components/move-card/move-card.component';
 import { MemoryGameComponent } from './components/memorygame/memorygame.component';
 import { GameComponent } from './pages/game/game.component';
+import { CatchgameComponent } from './components/catchgame/catchgame.component';
 
 
 
@@ -37,7 +38,8 @@ import { GameComponent } from './pages/game/game.component';
     ItemCardComponent,
     MoveCardComponent,
     MemoryGameComponent,
-    GameComponent
+    GameComponent,
+    CatchgameComponent
   ],
   imports: [
     BrowserModule,

@@ -30,6 +30,7 @@ export class MemoryGameComponent implements OnInit {
   isPlaying: boolean = false;
   pontos: number = 0;
   resultado: string = '';
+  selectedValue: number = 8;
 
   constructor(private service: PokemonService) {
     this.pokemon = {
@@ -99,7 +100,7 @@ export class MemoryGameComponent implements OnInit {
 
     this.isPlaying = false;
 
-    this.gerarPokemonsAleatorios(16);
+    this.gerarPokemonsAleatorios(this.selectedValue);
     
   }
 
@@ -166,5 +167,11 @@ export class MemoryGameComponent implements OnInit {
         this.gameOver = true
       }
     }, 1000);
+  }
+
+  onOptionSelected(event: Event): void {
+    const value = (event.target as HTMLInputElement).value; // Captura o valor como string
+    this.selectedValue = parseInt(value, 10); // Converte o valor para número e atribui à variável
+    this.resetGame();
   }
 }

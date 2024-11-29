@@ -8,6 +8,17 @@
       <p>Pontos</p>
       <p class="timer__cor"> {{ pontos }}</p>
     </div>
+    <div class="combobox">
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="8" checked (change)="onOptionSelected($event)" /><p>Fácil</p>
+      </label>
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="12" (change)="onOptionSelected($event)" /><p>Normal</p>
+      </label>
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="16" (change)="onOptionSelected($event)" /><p>Difícil</p>
+      </label>
+    </div>
     <div class="container__button">
       <div class="container__button__position">
         <button class="start" [disabled]="isPlaying" (click)="iniciarGame()"></button>

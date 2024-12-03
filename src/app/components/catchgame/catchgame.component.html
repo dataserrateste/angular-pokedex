@@ -28,6 +28,7 @@
       <div
         class="square"
         [ngClass]="{ enemy: hitPosition == square.id }"
+        [ngStyle]="{ 'background-image': hitPosition == square.id ? 'url(' + image + ')' : '' }"
         *ngFor="let square of row"
         (mousedown)="checkHit(square.id)"
       ></div>

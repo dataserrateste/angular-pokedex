@@ -1,158 +1,149 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { PokemonData } from '../../models/pokemonData';
 
 @Component({
   selector: 'app-catchgame',
   templateUrl: './catchgame.component.html',
-  styleUrl: './catchgame.component.css'
+  styleUrls: ['./catchgame.component.css'],
 })
-export class CatchgameComponent {
-  rows = [
-    [{ id: 1 }, { id: 2 }, { id: 3 }],
-    [{ id: 4 }, { id: 5 }, { id: 6 }],
-    [{ id: 7 }, { id: 8 }, { id: 9 }],
-    [{ id: 10 }, { id: 11 }, { id: 12 }],
-  ];
+export class CatchgameComponent implements OnInit {
+  rows = Array.from({ length: 4 }, (_, rowIndex) =>
+    Array.from({ length: 3 }, (_, colIndex) => ({ id: rowIndex * 3 + colIndex + 1 }))
+  );
 
-  
- 
   pokemon: PokemonData;
-  timer: number = 60; 
-  timerInterval: any; 
+  timer: number = 60;
+  timerInterval: ReturnType<typeof setInterval> | null = null;
+  gameInterval: ReturnType<typeof setInterval> | null = null;
   gameOver: boolean = false;
   isPlaying: boolean = false;
   score = 0;
   hitPosition: number | null = null;
-  gameInterval: any;
-  countDownInterval: any;
-
-  pokemonCarregado: string[] = [];
-  image: string = ''
+  pokemonCarregado: PokemonData[] = [];
+  image: string = '';
+  selectedValue: number = 1300;
 
   constructor(private service: PokemonService) {
-    this.pokemon = {
-      id: 0,
-      species: { name: '' },
-      sprites: {
-        front_default: '',
-        other: {
-          "official-artwork": {
-            front_default: '',
-          }
-        }
-      }
-      , types: []
-    }
+    this.pokemon = this.createEmptyPokemon();
   }
-  
+
   ngOnInit() {
     this.resetGame();
   }
 
+  createEmptyPokemon(): PokemonData {
+    return {
+      id: 0,
+      species: { name: '' },
+      sprites: {
+        front_default: '',
+        other: { 'official-artwork': { front_default: '' } },
+      },
+      types: [],
+    };
+  }
 
-  carregarPokemonsAleatorios() {
-    const numerosAleatorios: number[] = [];
-
-    while (numerosAleatorios.length < 100) {
-      const numero = Math.floor(Math.random() * 1025) + 1; // Gera número entre 1 e 1025
-      if (!numerosAleatorios.includes(numero)) { // Verifica se o número já foi gerado
-        numerosAleatorios.push(numero);
-        this.getPokemon(numero.toString())
-        console.log(numerosAleatorios);
-      }
+  async carregarPokemonsAleatorios() {
+    const numerosAleatorios = new Set<number>();
+    while (numerosAleatorios.size < 150) {
+      numerosAleatorios.add(Math.floor(Math.random() * 1025) + 1);
     }
-    
+    for (const numero of numerosAleatorios) {
+      await this.getPokemon(numero.toString());
+    }
   }
 
-  gerarPokemonsAleatorios(){
-    const numero = Math.floor(Math.random() * this.pokemonCarregado.length) + 1; // Número entre 1 e 100
-    
-    this.image =  this.pokemonCarregado[numero];
-    this.pokemonCarregado.slice(numero)
-   
-  }
-
-    
-  
-
-  getPokemon(searchName: string) {
-    this.service.getPokemon(searchName).subscribe(
-      {
-        next: (res) => {
-          this.pokemon = ({
-            id: res.id,
-            species: res.species,
-            sprites: res.sprites,
-            types: res.types
-          })
-                 
-          this.pokemonCarregado.push(res.sprites.front_default);
-        },
-        error: (err) => console.log('not found')
+  async getPokemon(searchName: string) {
+    try {
+      const res = await this.service.getPokemon(searchName).toPromise();
+      if (res) {
+        this.pokemonCarregado.push(res); // Só adiciona se res não for undefined.
+      } else {
+        console.error(`Pokemon not found or response invalid: ${searchName}`);
       }
-    )
+    } catch (error) {
+      console.error('Pokemon not found:', searchName);
+    }
   }
 
+  gerarPokemonAleatorio() {
+    if (this.pokemonCarregado.length === 0) {
+      console.error('No Pokémon available to generate.');
+      return;
+    }
+  
+    const numero = Math.floor(Math.random() * this.pokemonCarregado.length);
+    const pokemon = this.pokemonCarregado[numero];
+  
+    if (pokemon) {
+      this.image = pokemon.sprites.other['official-artwork'].front_default;
+      this.pokemonCarregado.splice(numero, 1); // Remove o Pokémon diretamente.
+    } else {
+      console.error('Failed to retrieve Pokémon.');
+    }
+  }
 
   startGame() {
     this.isPlaying = true;
     this.startTimer();
-    this.carregarPokemonsAleatorios();
-    // this.gameInterval = setInterval(() => this.randomSquare(), 1000);
-    // this.countDownInterval = setInterval(() => this.countDown(), 1000);
   }
 
   resetGame() {
-    this.timer = 60; 
+    this.clearIntervals();
+    this.timer = 60;
     this.gameOver = false;
     this.hitPosition = null;
     this.score = 0;
-    clearInterval(this.gameInterval);
-    clearInterval(this.timerInterval);
     this.isPlaying = false;
+    this.pokemonCarregado = [];
+    this.image = '';
+    this.carregarPokemonsAleatorios();
   }
 
-  // countDown() {
-  //   this.currentTime--;
-  //   if (this.currentTime <= 0) {
-  //     clearInterval(this.gameInterval);
-  //     clearInterval(this.countDownInterval);
-  //     // alert(Game Over! O seu resultado foi: ${this.score});
-  //   }
-  // }
+  clearIntervals() {
+    if (this.timerInterval) clearInterval(this.timerInterval);
+    if (this.gameInterval) clearInterval(this.gameInterval);
+  }
 
   startTimer() {
-    this.gameInterval = setInterval(() => this.randomSquare(), 1000);
+    this.gameInterval = setInterval(() => this.randomSquare(), this.selectedValue);
     this.timerInterval = setInterval(() => {
       this.timer--;
-
       if (this.timer <= 0) {
-        clearInterval(this.gameInterval);
-        clearInterval(this.timerInterval); // Para o timer ao final
-        this.gameOver = true
+        this.endGame();
       }
     }, 1000);
   }
 
-  async randomSquare() {
- 
-   this.hitPosition = Math.floor(Math.random() * 12) + 1;
-   this.gerarPokemonsAleatorios()
-    
+  randomSquare() {
+    this.hitPosition = Math.floor(Math.random() * 12) + 1;
+    this.gerarPokemonAleatorio();
+  }
+
+  endGame() {
+    this.clearIntervals();
+    this.pokemonCarregado = [];
+    this.image = '';
+    this.gameOver = true;
   }
 
   checkHit(squareId: number) {
     if (squareId === this.hitPosition) {
       this.score++;
       this.hitPosition = null;
-      this.playSound('hit');
     }
   }
 
-  playSound(audioName: string) {
-    const audio = new Audio('../../../assets/audios/${audioName}.m4a');
-    audio.volume = 0.2;
-    audio.play();
+  onOptionSelected(event: Event): void {
+    const value = (event.target as HTMLInputElement).value; // Captura o valor como string
+    if(value == 'D')
+      this.selectedValue = 700;
+    else if(value == 'N')
+      this.selectedValue = 1000;
+    else  
+      this.selectedValue = 1300;
+    
+    this.resetGame();
   }
 }

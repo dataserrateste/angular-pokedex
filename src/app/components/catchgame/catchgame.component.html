@@ -1,19 +1,4 @@
 <div class="container">
-  <!-- <div class="menu">
-    <div class="menu-time">
-      <h2 style="color: red;">Time Left</h2>
-      <h2 id="time-left">{{ timer }}</h2>
-    </div>
-    <div class="menu-score">
-      <h2 style="color: red;">Your Score</h2>
-      <h2 id="score">{{ score }}</h2>
-    </div>
-    <div class="menu-lives">
-      <img src="../../../assets/images/ralph.png" alt="foto do jogador" height="60px" />
-      <h2>x3</h2>
-    </div>
-  </div> -->
-
   <app-menu-game
   tituloGame="JOGO DA MEMÓRIA"
   [isPlaying]="isPlaying"
@@ -21,6 +6,7 @@
   [timer]="timer"
   (onIniciarGame)="startGame()"
   (onResetGame)="resetGame()"
+  (onOptionClicked)="onOptionSelected($event)"
 ></app-menu-game>
 
   <div class="panel">
@@ -28,10 +14,11 @@
       <div
         class="square"
         [ngClass]="{ enemy: hitPosition == square.id }"
-        [ngStyle]="{ 'background-image': hitPosition == square.id ? 'url(' + image + ')' : '' }"
+       
         *ngFor="let square of row"
         (mousedown)="checkHit(square.id)"
-      ></div>
+      ><img *ngIf="hitPosition === square.id" [src]="image" alt="Imagem">
+    </div>
     </div>
   </div>
 </div>

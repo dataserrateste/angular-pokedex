@@ -19,10 +19,14 @@ export class CatchgameComponent implements OnInit {
   gameOver: boolean = false;
   isPlaying: boolean = false;
   score = 0;
+  resultado: string = '';
   hitPosition: number | null = null;
   pokemonCarregado: PokemonData[] = [];
   image: string = '';
   selectedValue: number = 1300;
+  capturado : string = '';
+  pokemonCapturado: string[]=[];
+
 
   constructor(private service: PokemonService) {
     this.pokemon = this.createEmptyPokemon();
@@ -46,7 +50,7 @@ export class CatchgameComponent implements OnInit {
 
   async carregarPokemonsAleatorios() {
     const numerosAleatorios = new Set<number>();
-    while (numerosAleatorios.size < 150) {
+    while (numerosAleatorios.size < 120) {
       numerosAleatorios.add(Math.floor(Math.random() * 1025) + 1);
     }
     for (const numero of numerosAleatorios) {
@@ -78,6 +82,8 @@ export class CatchgameComponent implements OnInit {
   
     if (pokemon) {
       this.image = pokemon.sprites.other['official-artwork'].front_default;
+      // this.capturado = pokemon.sprites.front_default;
+      this.pokemonCapturado.push(pokemon.sprites.front_default);
       this.pokemonCarregado.splice(numero, 1); // Remove o Pokémon diretamente.
     } else {
       console.error('Failed to retrieve Pokémon.');
@@ -92,7 +98,7 @@ export class CatchgameComponent implements OnInit {
   resetGame() {
     this.clearIntervals();
     this.timer = 60;
-    this.gameOver = false;
+    this.gameOver = true;
     this.hitPosition = null;
     this.score = 0;
     this.isPlaying = false;
@@ -126,12 +132,15 @@ export class CatchgameComponent implements OnInit {
     this.pokemonCarregado = [];
     this.image = '';
     this.gameOver = true;
+    this.hitPosition = null;
+    this.resultado = 'Parabéns! Você capturou '+this.score+ ' pokemons!';
   }
 
   checkHit(squareId: number) {
     if (squareId === this.hitPosition) {
       this.score++;
       this.hitPosition = null;
+      // this.pokemonCapturado.push(this.capturado);
     }
   }
 

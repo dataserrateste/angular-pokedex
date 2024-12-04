@@ -1,24 +1,22 @@
 <div class="container">
-  <app-menu-game
-  tituloGame="JOGO DA MEMÓRIA"
-  [isPlaying]="isPlaying"
-  [pontos]="score"
-  [timer]="timer"
-  (onIniciarGame)="startGame()"
-  (onResetGame)="resetGame()"
-  (onOptionClicked)="onOptionSelected($event)"
-></app-menu-game>
+  <app-menu-game tituloGame="Pegue o Pokemon" [isPlaying]="isPlaying" [pontos]="score" [timer]="timer"
+    (onIniciarGame)="startGame()" (onResetGame)="resetGame()"
+    (onOptionClicked)="onOptionSelected($event)"></app-menu-game>
 
   <div class="panel">
+    <div class="panel-game" *ngIf="!gameOver">
     <div class="panel-row" *ngFor="let row of rows">
-      <div
-        class="square"
-        [ngClass]="{ enemy: hitPosition == square.id }"
-       
-        *ngFor="let square of row"
-        (mousedown)="checkHit(square.id)"
-      ><img *ngIf="hitPosition === square.id" [src]="image" alt="Imagem">
+      <div class="square" [ngClass]="{ enemy: hitPosition == square.id }" *ngFor="let square of row"
+        (mousedown)="checkHit(square.id)"><img *ngIf="hitPosition === square.id" [src]="image">
+      </div>
     </div>
+  </div>
+    <div class="resultado" *ngIf="gameOver">
+      <p>{{ resultado }}</p>
+      <div class="pokemon-capturado" *ngFor="let pokemon of pokemonCapturado ">
+        <img [src]="pokemon" alt="" srcset="">
+
+      </div>
     </div>
   </div>
 </div>

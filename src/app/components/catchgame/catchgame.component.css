@@ -88,4 +88,24 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+
+}
+
+.container__pokemon > .pokemon-capturado{
+  padding: 15px;
+
+}
+
+.container__pokemon > .pokemon-capturado > img{
+  background-color: #f1f1f1;
+  border-radius: 50%;
+}
+
+.container__pokemon > .pokemon-capturado > p{
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: #f1f1f1;
+ font-size: 10px;
+ font-weight: 600;
 }

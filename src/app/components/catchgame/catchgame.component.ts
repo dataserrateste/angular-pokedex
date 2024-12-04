@@ -24,9 +24,12 @@ export class CatchgameComponent implements OnInit {
   pokemonCarregado: PokemonData[] = [];
   image: string = '';
   selectedValue: number = 1300;
-  capturado : string = '';
-  pokemonCapturado: string[]=[];
-
+  capturadoImage : string = '';
+  capturadoName: string='';
+  pokemonCapturado: Array < {
+   name : string;
+   image : string;
+  }> = []
 
   constructor(private service: PokemonService) {
     this.pokemon = this.createEmptyPokemon();
@@ -82,8 +85,9 @@ export class CatchgameComponent implements OnInit {
   
     if (pokemon) {
       this.image = pokemon.sprites.other['official-artwork'].front_default;
-      this.capturado = pokemon.sprites.front_default;
-      // this.pokemonCapturado.push(pokemon.sprites.front_default);
+      this.capturadoImage = pokemon.sprites.front_default;
+      this.capturadoName = pokemon.species.name;
+      // this.pokemonCapturado.push({name: this.capturadoName, image:this.capturadoImage})
       this.pokemonCarregado.splice(numero, 1); // Remove o Pokémon diretamente.
     } else {
       console.error('Failed to retrieve Pokémon.');
@@ -140,7 +144,7 @@ export class CatchgameComponent implements OnInit {
     if (squareId === this.hitPosition) {
       this.score++;
       this.hitPosition = null;
-      this.pokemonCapturado.push(this.capturado);
+      this.pokemonCapturado.push({name: this.capturadoName, image:this.capturadoImage})
     }
   }
 

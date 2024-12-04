@@ -15,7 +15,8 @@
       <p>{{ resultado }}</p><br>
       <div class="container__pokemon">
         <div class="pokemon-capturado" *ngFor="let pokemon of pokemonCapturado ">
-          <img [src]="pokemon" alt="" srcset="">
+          <img [src]="pokemon.image" alt="" srcset="">
+           <p>{{pokemon.name|uppercase}}</p>
         </div>
       </div>
     </div>

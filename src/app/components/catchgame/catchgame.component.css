@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&display=swap');
 
+
 .container {
   width: 100%;
   max-width: 1920px;
@@ -19,9 +20,19 @@
   align-items: center;
   justify-content: center;
  width: 68%;
-    
+   
 
 }
+
+
+.square,
+.square:hover,
+.enemy,
+.enemy:hover
+{
+  cursor: url('../../../assets/images//iconpokeball.png'), auto;
+}
+
 
 
 
@@ -30,9 +41,9 @@
   width: 150px;
   border: 1px solid #000000;
   background-color: #fff;
-  background-image: url("../../../assets/images/BackgroundCatch\ 4.png");
+  background-image: url("../../../assets/images/BackgroundCatch4.png");
   background-size: cover;
-  opacity: 0.3;
+  /* opacity: 0.3; */
 
 }
 

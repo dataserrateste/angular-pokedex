@@ -1,0 +1,24 @@
+.container{
+    margin: 0 auto;
+}
+
+.container__superior{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    border: 2px solid red;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.container__inferior{
+    width: 200px;
+    height: 70px;
+    background-color: white;
+    border-bottom: 2px solid red;
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+

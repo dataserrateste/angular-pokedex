@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-card',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class GameCardComponent {
 
+  @Input() titulo: string = ''
+  @Input() imgGame: string = ''
 }

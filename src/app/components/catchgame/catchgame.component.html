@@ -12,10 +12,11 @@
     </div>
   </div>
     <div class="resultado" *ngIf="gameOver">
-      <p>{{ resultado }}</p>
-      <div class="pokemon-capturado" *ngFor="let pokemon of pokemonCapturado ">
-        <img [src]="pokemon" alt="" srcset="">
-
+      <p>{{ resultado }}</p><br>
+      <div class="container__pokemon">
+        <div class="pokemon-capturado" *ngFor="let pokemon of pokemonCapturado ">
+          <img [src]="pokemon" alt="" srcset="">
+        </div>
       </div>
     </div>
   </div>

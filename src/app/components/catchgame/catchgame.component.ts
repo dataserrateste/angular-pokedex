@@ -82,8 +82,8 @@ export class CatchgameComponent implements OnInit {
   
     if (pokemon) {
       this.image = pokemon.sprites.other['official-artwork'].front_default;
-      // this.capturado = pokemon.sprites.front_default;
-      this.pokemonCapturado.push(pokemon.sprites.front_default);
+      this.capturado = pokemon.sprites.front_default;
+      // this.pokemonCapturado.push(pokemon.sprites.front_default);
       this.pokemonCarregado.splice(numero, 1); // Remove o Pokémon diretamente.
     } else {
       console.error('Failed to retrieve Pokémon.');
@@ -98,7 +98,7 @@ export class CatchgameComponent implements OnInit {
   resetGame() {
     this.clearIntervals();
     this.timer = 60;
-    this.gameOver = true;
+    this.gameOver = false;
     this.hitPosition = null;
     this.score = 0;
     this.isPlaying = false;
@@ -140,7 +140,7 @@ export class CatchgameComponent implements OnInit {
     if (squareId === this.hitPosition) {
       this.score++;
       this.hitPosition = null;
-      // this.pokemonCapturado.push(this.capturado);
+      this.pokemonCapturado.push(this.capturado);
     }
   }
 

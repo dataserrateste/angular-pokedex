@@ -70,6 +70,10 @@
 .resultado {
   padding: 30px;
   background-color: #f10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .resultado>p {
@@ -79,12 +83,9 @@
   color: #f1f1f1;
 }
 
-
-.resultado > .pokemon-capturado{
-  width: 600px;
-   
-  border: 1px solid blue;
-}
-.resultado > .pokemon-capturado > img{
- border: 1px solid white
+.container__pokemon{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }

@@ -21,6 +21,9 @@ import { MemoryGameComponent } from './components/memorygame/memorygame.componen
 import { GameComponent } from './pages/game/game.component';
 import { CatchgameComponent } from './components/catchgame/catchgame.component';
 import { MenuGameComponent } from './components/menu-game/menu-game.component';
+import { GameMemoryComponent } from './pages/game-memory/game-memory.component';
+import { GameCatchComponent } from './pages/game-catch/game-catch.component';
+import { GameCardComponent } from './components/game-card/game-card.component';
 
 
 
@@ -41,7 +44,10 @@ import { MenuGameComponent } from './components/menu-game/menu-game.component';
     MemoryGameComponent,
     GameComponent,
     CatchgameComponent,
-    MenuGameComponent
+    MenuGameComponent,
+    GameMemoryComponent,
+    GameCatchComponent,
+    GameCardComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { TypeData } from '../models/typeData';
 import { PokemonList } from '../models/pokemonList';
 import { ItemData } from '../models/itemData';
 import { MoveData } from '../models/moveData';
+import { ItemCategoryData } from '../models/itemCategoryData';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class PokemonService {
   private typeData: TypeData | any
   private itemData: ItemData | any
   private moveData: MoveData | any
+  private itemCategoryData: ItemCategoryData | any
   private pokeList: PokemonList | any
   displayed: number[] = [];
   objectsPerPage: number = 24;
@@ -55,6 +57,16 @@ export class PokemonService {
     this.moveData = this.http.get<MoveData>(`${this.baseURL}move/${moveName}`)
 
     return this.moveData
+  }
+
+  getItemCategory(itemCategoryID: number): Observable<ItemCategoryData> {
+    this.itemCategoryData = this.http.get<ItemCategoryData>(`${this.baseURL}item-category/${itemCategoryID}`).pipe(
+      catchError(err => {
+        // console.error(`Erro ao carregar a categoria com ID ${itemCategoryID}:`, err);
+        return of(null); // Retorna null em caso de erro
+      })
+    );
+        return this.itemCategoryData
   }
    
   hasMore(object: number[]): boolean {

@@ -1,25 +1,3 @@
-// export type PokemonData = {
-//   id: number
-//   species: {
-//     name: string
-//   }
-//   sprites: {
-//     front_default: string
-//     other: {
-//       "official-artwork": {
-//         front_default: string
-//       }
-//     }
-//   }
-//   types: {
-//     slot: number
-//     type: {
-//       name: string
-//       url: string
-//     }
-//   }[]
-// }
-
 export class PokemonData {
   id: number;
   species: {
@@ -33,6 +11,14 @@ export class PokemonData {
       };
     };
   };
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
   types: {
     slot: number;
     type: {
@@ -52,6 +38,7 @@ export class PokemonData {
         },
       },
     };
+    this.stats = [];
     this.types = [];
   }
 }

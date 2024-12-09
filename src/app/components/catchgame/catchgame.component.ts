@@ -12,7 +12,7 @@ export class CatchgameComponent implements OnInit {
     Array.from({ length: 3 }, (_, colIndex) => ({ id: rowIndex * 3 + colIndex + 1 }))
   );
 
-  pokemon: PokemonData;
+  pokemon: PokemonData = new PokemonData();
   timer: number = 60;
   timerInterval: ReturnType<typeof setInterval> | null = null;
   gameInterval: ReturnType<typeof setInterval> | null = null;
@@ -31,26 +31,13 @@ export class CatchgameComponent implements OnInit {
    image : string;
   }> = []
 
-  constructor(private service: PokemonService) {
-    this.pokemon = this.createEmptyPokemon();
-  }
+  constructor(private service: PokemonService) {  }
 
   ngOnInit() {
     this.resetGame();
   }
 
-  createEmptyPokemon(): PokemonData {
-    return {
-      id: 0,
-      species: { name: '' },
-      sprites: {
-        front_default: '',
-        other: { 'official-artwork': { front_default: '' } },
-      },
-      types: [],
-    };
-  }
-
+  
   async carregarPokemonsAleatorios() {
     const numerosAleatorios = new Set<number>();
     while (numerosAleatorios.size < 120) {

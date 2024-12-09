@@ -1,4 +1,4 @@
-export type ItemData = {
+export class ItemData {
     id: number
     name: string
     cost: number
@@ -8,5 +8,18 @@ export type ItemData = {
     category: {
         name: string
         url: string
+    }
+
+    constructor() {
+        this.id = 0;
+        this.name = '';
+        this.cost = 0;
+        this.sprites = {
+            default: ''
+        };
+        this.category = {
+            name: '',
+            url: ''
+        };
     }
 }

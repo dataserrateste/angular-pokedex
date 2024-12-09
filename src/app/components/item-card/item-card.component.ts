@@ -9,23 +9,10 @@ import { PokemonService } from '../../services/pokemon.service';
 })
 export class ItemCardComponent {
 
-  item: ItemData;
+  item: ItemData = new ItemData;
 
 
-  constructor(private service: PokemonService) {
-    this.item = {
-      id: 0,
-      name: '',
-      cost: 0,
-      sprites: {
-        default: '',
-      },
-      category: {
-        name: '',
-        url: '',
-      }
-    }
-  }
+  constructor(private service: PokemonService) {  }
 
 
   @Input()
@@ -40,13 +27,7 @@ export class ItemCardComponent {
       {
         next: (res) => {
 
-          this.item = {
-            id: res.id,
-            name: res.name,
-            cost: res.cost,
-            sprites: res.sprites,
-            category: res.category
-          }
+          this.item = Object.assign(new ItemData(), res);
         },
         error: (err) => console.log('not found')
       }

@@ -2,17 +2,7 @@ body {
     cursor: url("../../../assets/cursor/yugicursor.png"), default;
   }
   
-  #audio-player {
-    width: 30px;
-    height: 30px;
-    transition: all 0.2s;
-  
-  }
-  
-  #audio-player:hover {
-    transform: scale(1.2);
-  }
-  
+    
   .active {
     opacity: 1;
   }
@@ -29,33 +19,7 @@ body {
     cursor: url("../../../assets/cursor/yamiyugicursorGLOW.png"), auto;
   }
   
-  .bg-video {
-    position: absolute;
-    z-index: -2;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .bg-video .video {
-    height: 100vh;
-  }
-  
-  .bg-video::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(90deg,
-        rgba(0, 0, 0, 100) 0%,
-        rgba(0, 0, 0, 0.8) 50%,
-        rgba(0, 0, 0, 100) 100%);
-  }
-  
+    
   .container {
     position: relative;
     z-index: 3;
@@ -158,15 +122,33 @@ body {
   }
   
   .card {
-    height: 250px;
-    width: 200px;
+    height: 175px;
+    width: 140px;
     transition: all 0.2s;
     cursor: pointer;
     border: 10px solid rgb(31, 31, 31);
     border-radius: 10px;
   }
   
-  .card:hover {
+  #player-cards{
+  
+    border: 1px solid red;
+  
+  }
+
+  .pcard .container{
+    transform: scale(0.675); /* Reduz o tamanho para 80% */
+    transform-origin: top left; /* Define o ponto de origem para o escalonamento */
+
+   
+  }
+  .pcard{
+    height: 175px;
+    width: 140px;
+    border: 2px solid blue;
+  }
+
+  .pcard:hover {
     transform: scale(1.2);
   }
 
@@ -178,3 +160,5 @@ body {
   #next-duel.show {
     display: block;
   }
+
+  

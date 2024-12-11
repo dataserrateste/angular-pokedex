@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { PokemonData } from '../../models/pokemonData';
 import { PokemonService } from '../../services/pokemon.service';
@@ -6,7 +6,8 @@ import { PokemonService } from '../../services/pokemon.service';
 @Component({
   selector: 'app-cardsgame',
   templateUrl: './cardsgame.component.html',
-  styleUrl: './cardsgame.component.css'
+  styleUrl: './cardsgame.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class CardsgameComponent implements OnInit {
   @ViewChild('bgm') bgmAudio!: ElementRef<HTMLAudioElement>;

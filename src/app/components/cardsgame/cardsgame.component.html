@@ -7,12 +7,12 @@
       <p>Computer: {{ score.computerScore }}</p>
     </div>
 
-    <div class="card-details">
+    <!-- <div class="card-details">
       <h3>Player's Card</h3>
-      <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="180px" width="125px"
+      <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="250px" width="200px"
         [alt]="playerFieldCard.name" />
       <p *ngIf="playerFieldCard">{{ playerFieldCard.name }}</p>
-    </div>
+    </div> -->
 
     <!-- <div class="card-details">
       <h3>Computer's Card</h3>
@@ -22,9 +22,11 @@
   </div>
 
   <div class="container__right">
+
     <!-- Cartas do Computador -->
     <div class="card-box framed" id="computer-cards">
-      <img *ngFor="let card of computerCardsP" src="../../../assets/images/fundoCard.jpg" class="card" [alt]="card.species.name" />
+      <img *ngFor="let card of computerCardsP" src="../../../assets/images/fundoCard.jpg" class="card"
+        [alt]="card.species.name" />
       <!-- <div *ngFor="let card of computerCardsP">
         <app-cardsgame-frontcard class="card" [infoCard]="card"></app-cardsgame-frontcard>
       </div> -->
@@ -36,7 +38,7 @@
         <div class="card-infield">
           <!-- <img *ngIf="playerFieldCard" [src]="playerFieldCard.sprites.front_default" height="180px" width="125px"
             alt="Player Field Card" /> -->
-            <app-cardsgame-frontcard *ngIf="playerFieldCard" [infoCard]="playerFieldCard"></app-cardsgame-frontcard>
+          <app-cardsgame-frontcard *ngIf="playerFieldCard" [infoCard]="playerFieldCard"></app-cardsgame-frontcard>
         </div>
         <img height="100px" src="assets/icons/millenium2.png" alt="Versus Icon" />
         <div class="card-infield">
@@ -56,7 +58,7 @@
     <div class="card-box framed" id="player-cards">
       <!-- <img *ngFor="let card of playerCardsP" [src]="card.sprites.front_default" class="card" 
          (click)="selectCard(card)" alt="Card Back" /> -->
-      <div *ngFor="let card of playerCardsP">
+      <div *ngFor="let card of playerCardsP" class="pcard">
         <app-cardsgame-frontcard [infoCard]="card" (click)="selectCard(card)"></app-cardsgame-frontcard>
       </div>
     </div>

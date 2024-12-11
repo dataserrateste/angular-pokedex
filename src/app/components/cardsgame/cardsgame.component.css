@@ -158,9 +158,12 @@ body {
   }
   
   .card {
-    height: 100px;
+    height: 250px;
+    width: 200px;
     transition: all 0.2s;
     cursor: pointer;
+    border: 10px solid rgb(31, 31, 31);
+    border-radius: 10px;
   }
   
   .card:hover {

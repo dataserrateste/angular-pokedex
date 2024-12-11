@@ -9,6 +9,9 @@ export class PokemonData {
       "official-artwork": {
         front_default: string;
       };
+      home:{
+        front_default: string;
+      };
     };
   };
   stats: {
@@ -34,6 +37,9 @@ export class PokemonData {
       front_default: '',
       other: {
         "official-artwork": {
+          front_default: '',
+        },
+        home:{
           front_default: '',
         },
       },

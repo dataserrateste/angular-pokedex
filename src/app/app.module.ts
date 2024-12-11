@@ -26,6 +26,7 @@ import { GameCatchComponent } from './pages/game-catch/game-catch.component';
 import { GameCardComponent } from './components/game-card/game-card.component';
 import { GameCardsComponent } from './pages/game-cards/game-cards.component';
 import { CardsgameComponent } from './components/cardsgame/cardsgame.component';
+import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/cardsgame-frontcard.component';
 
 
 
@@ -51,7 +52,8 @@ import { CardsgameComponent } from './components/cardsgame/cardsgame.component';
     GameCatchComponent,
     GameCardComponent,
     GameCardsComponent,
-    CardsgameComponent
+    CardsgameComponent,
+    CardsgameFrontcardComponent
   ],
   imports: [
     BrowserModule,

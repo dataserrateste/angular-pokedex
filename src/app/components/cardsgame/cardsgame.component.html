@@ -20,31 +20,34 @@
       <p *ngIf="computerFieldCard">{{ computerFieldCard.name }}</p>
     </div> -->
   </div>
-
-  <div class="container__right">
+  <div class="gameOver" *ngIf="gameOver">
+    <p>ACABOU O JOGO!</p>
+    <button (click)="init()">REINICIAR O GAME</button>
+  </div>
+  <div class="container__right" *ngIf="!gameOver">
 
     <!-- Cartas do Computador -->
     <div class="card-box framed" id="computer-cards">
-      <img *ngFor="let card of computerCardsP" src="../../../assets/images/fundoCard.jpg" class="card"
-        [alt]="card.species.name" />
-      <!-- <div *ngFor="let card of computerCardsP">
-        <app-cardsgame-frontcard class="card" [infoCard]="card"></app-cardsgame-frontcard>
-      </div> -->
+      <!-- <img *ngFor="let card of computerCards" src="../../../assets/images/fundoCard.jpg" class="card"
+        [alt]="card.species.name" /> -->
+      <div *ngFor="let card of computerCards">
+        <app-cardsgame-frontcard class="pcard" [infoCard]="card"></app-cardsgame-frontcard>
+      </div>
     </div>
 
     <!-- Campo de duelo -->
-    <div class="card-versus__container" *ngIf="!chooseStatus" >
+    <div class="card-versus__container" *ngIf="!chooseStatus">
 
-      <button>HP</button>
-      <button>ATTACK</button>
-      <button>DEFENSE</button>
-      <button>SPECIAL ATTACK</button>
-      <button>SPECIAL DEFENSE</button>
-      <button>SPEED</button>
+      <button (click)="checkStatus(0)" [disabled]="disabledButtons[0]">HP</button>
+      <button (click)="checkStatus(1)" [disabled]="disabledButtons[1]">ATTACK</button>
+      <button (click)="checkStatus(2)" [disabled]="disabledButtons[2]">DEFENSE</button>
+      <button (click)="checkStatus(3)" [disabled]="disabledButtons[3]">SPECIAL ATTACK</button>
+      <button (click)="checkStatus(4)" [disabled]="disabledButtons[4]">SPECIAL DEFENSE</button>
+      <button (click)="checkStatus(5)" [disabled]="disabledButtons[5]">SPEED</button>
     </div>
 
 
-    <div class="card-versus__container" *ngIf="chooseStatus" >
+    <div class="card-versus__container" *ngIf="chooseStatus">
       <div class="versus-top">
         <div class="card-infield">
           <!-- <img *ngIf="playerFieldCard" [src]="playerFieldCard.sprites.front_default" height="180px" width="125px"
@@ -66,10 +69,10 @@
     </div>
 
     <!-- Cartas do Jogador -->
-    <div class="card-box framed" id="player-cards">
+    <div class="card-box framed" id="player-cards" [ngClass]="{ 'disabled-div': !nextRound }">
       <!-- <img *ngFor="let card of playerCardsP" [src]="card.sprites.front_default" class="card" 
          (click)="selectCard(card)" alt="Card Back" /> -->
-      <div *ngFor="let card of playerCardsP" class="pcard">
+      <div *ngFor="let card of playerCards" class="pcard">
         <app-cardsgame-frontcard [infoCard]="card" (click)="selectCard(card)"></app-cardsgame-frontcard>
       </div>
     </div>

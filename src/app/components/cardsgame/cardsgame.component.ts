@@ -16,22 +16,17 @@ export class CardsgameComponent implements OnInit {
   // Dados do jogo
 
   pokemon: PokemonData = new PokemonData;
-  playerCardsP: PokemonData[] = [];
-  computerCardsP: PokemonData[] = [];
-
-  playerCards: any[] = [];
-  computerCards: any[] = [];
-  cardData: any[] = [
-    { id: 0, name: 'Blue Eyes White Dragon', type: 'Paper', img: 'assets/icons/dragon.png', winOf: [1], loseOf: [2] },
-    { id: 1, name: 'Dark Magician', type: 'Rock', img: 'assets/icons/magician.png', winOf: [2], loseOf: [0] },
-    { id: 2, name: 'Exodia', type: 'Scissors', img: 'assets/icons/exodia.png', winOf: [0], loseOf: [1] }
-  ];
+  playerCards: PokemonData[] = [];
+  computerCards: PokemonData[] = [];
   playerFieldCard: any = null;
   computerFieldCard: any = null;
   score = { playerScore: 250, computerScore: 250 };
   duelResult: string = '';
   selectedStatus: number = 0;
   chooseStatus: boolean = false;
+  nextRound:boolean = false;
+  disabledButtons: boolean[] = [false, false, false, false, false, false];
+  gameOver: boolean = false;
 
 
   constructor(private service: PokemonService) {}
@@ -42,17 +37,14 @@ export class CardsgameComponent implements OnInit {
 
   /** Inicializa o jogo */
   init() {
-    this.playerCards = this.generateRandomCards(5);
-    this.computerCards = this.generateRandomCards(5);
-    // this.playerCardsP = this.gerarPokemonsAleatorios();
-    // this.computerCardsP = this.gerarPokemonsAleatorios();
-    this.gerarPokemonsAleatorios(this.playerCardsP);
-    this.gerarPokemonsAleatorios(this.computerCardsP);
+    this.gerarPokemonsAleatorios(this.playerCards);
+    this.gerarPokemonsAleatorios(this.computerCards);
    
+    this.gameOver = false;
+    this.disabledButtons = [false, false, false, false, false, false];
    }
 
   
-
   gerarPokemonsAleatorios(pokeCards: PokemonData[]){
     const requests = [];
   
@@ -70,30 +62,22 @@ export class CardsgameComponent implements OnInit {
     );
   }
 
-  
-  /** Gera cartas aleatórias */
-  generateRandomCards(count: number): any[] {
-    const cards = [];
-    for (let i = 0; i < count; i++) {
-      cards.push(this.getRandomCard());
-    }
-    return cards;
-  }
-
   /** Retorna uma carta aleatória */
   getRandomCard(): any {
-    const randomIndex = Math.floor(Math.random() * this.computerCardsP.length);
-    return this.computerCardsP[randomIndex];
+    const randomIndex = Math.floor(Math.random() * this.computerCards.length);
+    return this.computerCards[randomIndex];
   }
 
   /** Lógica ao selecionar uma carta */
   selectCard(card: any) {
     this.playerFieldCard = card;
     this.computerFieldCard = this.getRandomCard();
-    this.duelResult = this.checkDuelResult(card.stats[1].base_stat, this.computerFieldCard.stats[1].base_stat);
-    console.log(this.duelResult)
+    this.duelResult = this.checkDuelResult(card.stats[this.selectedStatus].base_stat, this.computerFieldCard.stats[this.selectedStatus].base_stat);
     this.updateScore();
     this.drawButton(this.duelResult);
+    this.nextRound = false;
+    this.playerCards.splice(this.findIndex(this.playerFieldCard, 1), 1);
+    this.computerCards.splice(this.findIndex(this.computerFieldCard, 2), 1);
   }
 
   /** Atualiza o placar */
@@ -122,7 +106,15 @@ export class CardsgameComponent implements OnInit {
     // Oculta o botão
     const button = this.nextDuelButton.nativeElement;
     button.style.display = 'none';
+    this.checkStatusGame();
+    console.log(this.gameOver);
   }
+
+  checkStatusGame(){
+    if(this.playerCards.length == 0)
+      this.gameOver = true
+  }
+
 
   /** Verifica o resultado do duelo */
   checkDuelResult(playerCardStat: number, computerCardStat: number): string {
@@ -135,6 +127,27 @@ export class CardsgameComponent implements OnInit {
            return 'draw';
     }
   }
-
   
+  checkStatus(status:number){
+    this.selectedStatus = status;
+    this.chooseStatus = true;
+    this.nextRound = true;
+    this.disabledButtons[status] = true;
+  }
+
+  findIndex(index: any, n:number):number{
+    let indice:number;
+    
+    if(n == 1){
+      indice = this.playerCards.findIndex(obj => 
+        JSON.stringify(obj) === JSON.stringify(index)
+      );
+    }
+    else{
+      indice = this.computerCards.findIndex(obj => 
+        JSON.stringify(obj) === JSON.stringify(index)
+      );
+    }
+    return indice;
+  }
 }

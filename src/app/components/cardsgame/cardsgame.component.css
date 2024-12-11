@@ -147,7 +147,6 @@ body {
   .pcard{
     height: 175px;
     width: 140px;
-    border: 2px solid blue;
   }
 
   .pcard:hover {
@@ -163,4 +162,7 @@ body {
     display: block;
   }
 
-  
+  .disabled-div {
+    pointer-events: none; /* Desativa interações */
+    /*opacity: 0.5; ---- Indica visualmente que está desativada */
+  }

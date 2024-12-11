@@ -33,7 +33,18 @@
     </div>
 
     <!-- Campo de duelo -->
-    <div class="card-versus__container">
+    <div class="card-versus__container" *ngIf="!chooseStatus" >
+
+      <button>HP</button>
+      <button>ATTACK</button>
+      <button>DEFENSE</button>
+      <button>SPECIAL ATTACK</button>
+      <button>SPECIAL DEFENSE</button>
+      <button>SPEED</button>
+    </div>
+
+
+    <div class="card-versus__container" *ngIf="chooseStatus" >
       <div class="versus-top">
         <div class="card-infield">
           <!-- <img *ngIf="playerFieldCard" [src]="playerFieldCard.sprites.front_default" height="180px" width="125px"

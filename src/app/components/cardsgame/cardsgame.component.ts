@@ -28,8 +28,11 @@ export class CardsgameComponent implements OnInit {
   ];
   playerFieldCard: any = null;
   computerFieldCard: any = null;
-  score = { playerScore: 0, computerScore: 0 };
+  score = { playerScore: 250, computerScore: 250 };
   duelResult: string = '';
+  selectedStatus: number = 0;
+  chooseStatus: boolean = false;
+
 
   constructor(private service: PokemonService) {}
   
@@ -46,8 +49,7 @@ export class CardsgameComponent implements OnInit {
     this.gerarPokemonsAleatorios(this.playerCardsP);
     this.gerarPokemonsAleatorios(this.computerCardsP);
    
-    this.playBackgroundMusic();
-  }
+   }
 
   
 
@@ -68,32 +70,7 @@ export class CardsgameComponent implements OnInit {
     );
   }
 
-  // gerarPokemonsAleatorios(): PokemonData[] {
-  //   const cards: PokemonData[] = [];;
-    
-  //   for (let i = 0; i < 5; i++) {
-  //     const numero = Math.floor(Math.random() * 1025) + 1; // Gera número entre 1 e 1025
-  //     this.getPokemon(numero.toString())
-      
-  //     cards.push(this.pokemon)
-  //   }
-   
-  //   return cards;
-    
-  // }
-
-  // getPokemon(searchName: string) {
-  //   this.service.getPokemon(searchName).subscribe(
-  //     {
-  //       next: (res) => {
-  //         this.pokemon = Object.assign(new PokemonData(), res);
-  //       },
-  //       error: (err) => console.log('not found')
-  //     }
-  //   )
-  // }
-
-
+  
   /** Gera cartas aleatórias */
   generateRandomCards(count: number): any[] {
     const cards = [];
@@ -105,8 +82,6 @@ export class CardsgameComponent implements OnInit {
 
   /** Retorna uma carta aleatória */
   getRandomCard(): any {
-    // const randomIndex = Math.floor(Math.random() * this.cardData.length);
-    // return this.cardData[randomIndex];
     const randomIndex = Math.floor(Math.random() * this.computerCardsP.length);
     return this.computerCardsP[randomIndex];
   }
@@ -115,7 +90,8 @@ export class CardsgameComponent implements OnInit {
   selectCard(card: any) {
     this.playerFieldCard = card;
     this.computerFieldCard = this.getRandomCard();
-    this.duelResult = this.checkDuelResult(card, this.computerFieldCard);
+    this.duelResult = this.checkDuelResult(card.stats[1].base_stat, this.computerFieldCard.stats[1].base_stat);
+    console.log(this.duelResult)
     this.updateScore();
     this.drawButton(this.duelResult);
   }
@@ -123,9 +99,9 @@ export class CardsgameComponent implements OnInit {
   /** Atualiza o placar */
   updateScore() {
     if (this.duelResult === 'win') {
-      this.score.playerScore++;
+      this.score.computerScore-= 50;
     } else if (this.duelResult === 'lose') {
-      this.score.computerScore++;
+      this.score.playerScore-=50;
     }
   }
 
@@ -141,38 +117,24 @@ export class CardsgameComponent implements OnInit {
     this.playerFieldCard = null;
     this.computerFieldCard = null;
     this.duelResult = '';
-
+    this.selectedStatus= 0;
+    this.chooseStatus = false;
     // Oculta o botão
     const button = this.nextDuelButton.nativeElement;
     button.style.display = 'none';
-    this.playerCards = this.generateRandomCards(5);
-    this.computerCards = this.generateRandomCards(5);
   }
 
   /** Verifica o resultado do duelo */
-  checkDuelResult(playerCard: any, computerCard: any): string {
-    if (playerCard.winOf.includes(computerCard.id)) {
-      this.playAudio('win');
-      return 'win';
-    } else if (playerCard.loseOf.includes(computerCard.id)) {
-      this.playAudio('lose');
+  checkDuelResult(playerCardStat: number, computerCardStat: number): string {
+    if (playerCardStat> computerCardStat) {
+       return 'win';
+    } else if (computerCardStat>playerCardStat) {
+      
       return 'lose';
     } else {
-      this.playAudio('draw');
-      return 'draw';
+           return 'draw';
     }
   }
 
-  /** Reproduz o áudio correspondente */
-  playAudio(status: string) {
-    const audio = new Audio(`assets/audios/${status}.wav`);
-    audio.play();
-  }
-
-  /** Reproduz a música de fundo */
-  playBackgroundMusic() {
-    if (this.bgmAudio) {
-      this.bgmAudio.nativeElement.play();
-    }
-  }
+  
 }

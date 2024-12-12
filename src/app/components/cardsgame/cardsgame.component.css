@@ -1,6 +1,6 @@
-body {
+/* body {
     cursor: url("../../../assets/cursor/yugicursor.png"), default;
-  }
+  } */
   
     
   .active {
@@ -11,13 +11,13 @@ body {
     opacity: 0.3;
   }
   
-  button,
+  /* button,
   button:hover,
   img:hover,
   a,
   a:hover {
-    cursor: url("../../../assets/cursor/yamiyugicursorGLOW.png"), auto;
-  }
+    cursor: url('../../../assets/images//iconpokeball.png'), auto;
+  } */
   
     
   .container {
@@ -138,12 +138,16 @@ body {
   
   }
 
+  .pCcard .container{
+    transform: scale(0.375); /* Reduz o tamanho para 80% */
+    transform-origin: top left; /* Define o ponto de origem para o escalonamento */
+  }
+
   .pcard .container{
     transform: scale(0.675); /* Reduz o tamanho para 80% */
     transform-origin: top left; /* Define o ponto de origem para o escalonamento */
-
-   
   }
+
   .pcard{
     height: 175px;
     width: 140px;
@@ -165,4 +169,25 @@ body {
   .disabled-div {
     pointer-events: none; /* Desativa interações */
     /*opacity: 0.5; ---- Indica visualmente que está desativada */
+  }
+
+
+  .barra-vida {
+    width: 250px;
+    background-color: #ccc;
+    border: 1px solid #000;
+    height: 30px;
+    position: relative;
+  }
+  
+  .vida-atual {
+    height: 100%;
+    background-color: green;
+    text-align: center;
+    color: white;
+    line-height: 30px; /* Centraliza o texto verticalmente */
+  }
+  
+  .vida-atual.game-over {
+    background-color: red;
   }

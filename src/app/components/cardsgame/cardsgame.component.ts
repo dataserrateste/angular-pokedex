@@ -18,6 +18,8 @@ export class CardsgameComponent implements OnInit {
   pokemon: PokemonData = new PokemonData;
   playerCards: PokemonData[] = [];
   computerCards: PokemonData[] = [];
+  playerCardsPlayed: PokemonData[] = [];
+  computerCardsPlayed: PokemonData[] = [];
   playerFieldCard: any = null;
   computerFieldCard: any = null;
   score = { playerScore: 250, computerScore: 250 };
@@ -27,6 +29,8 @@ export class CardsgameComponent implements OnInit {
   nextRound:boolean = false;
   disabledButtons: boolean[] = [false, false, false, false, false, false];
   gameOver: boolean = false;
+  vidaPercentage = { player: this.score.playerScore, computer: this.score.computerScore }; // Para a largura da barra de vida
+
 
 
   constructor(private service: PokemonService) {}
@@ -39,7 +43,7 @@ export class CardsgameComponent implements OnInit {
   init() {
     this.gerarPokemonsAleatorios(this.playerCards);
     this.gerarPokemonsAleatorios(this.computerCards);
-   
+    
     this.gameOver = false;
     this.disabledButtons = [false, false, false, false, false, false];
    }
@@ -76,6 +80,8 @@ export class CardsgameComponent implements OnInit {
     this.updateScore();
     this.drawButton(this.duelResult);
     this.nextRound = false;
+    this.playerCardsPlayed.push(this.playerFieldCard);
+    this.computerCardsPlayed.push(this.computerFieldCard);
     this.playerCards.splice(this.findIndex(this.playerFieldCard, 1), 1);
     this.computerCards.splice(this.findIndex(this.computerFieldCard, 2), 1);
   }
@@ -84,8 +90,10 @@ export class CardsgameComponent implements OnInit {
   updateScore() {
     if (this.duelResult === 'win') {
       this.score.computerScore-= 50;
+      this.vidaPercentage.computer = this.score.computerScore;
     } else if (this.duelResult === 'lose') {
       this.score.playerScore-=50;
+      this.vidaPercentage.player = this.score.playerScore;
     }
   }
 

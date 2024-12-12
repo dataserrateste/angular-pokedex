@@ -6,7 +6,29 @@
       <p>Player: {{ score.playerScore }}</p>
       <p>Computer: {{ score.computerScore }}</p>
     </div>
-
+    <div class="barra-vida">
+      <div class="vida-atual" [style.width]="vidaPercentage.player +'px'" >
+        {{ vidaPercentage.player }}
+      </div>
+    </div>
+    <div class="barra-vida">
+      <div class="vida-atual" [style.width]="vidaPercentage.computer +'px'" >
+        {{ vidaPercentage.computer }}
+      </div>
+    </div>
+    <div>
+      <p>PLAYER</p>
+      <div *ngFor="let card of playerCardsPlayed">
+        <app-cardsgame-frontcard class="pCcard" [infoCard]="card"></app-cardsgame-frontcard>
+      </div>
+    </div>
+    <div>
+      <p>COMPUTER</p>
+      <div *ngFor="let card of computerCardsPlayed">
+        <app-cardsgame-frontcard class="pCcard" [infoCard]="card"></app-cardsgame-frontcard>
+      </div>
+    </div>
+    
     <!-- <div class="card-details">
       <h3>Player's Card</h3>
       <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="250px" width="200px"

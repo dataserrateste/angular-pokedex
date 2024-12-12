@@ -46,6 +46,8 @@ export class CardsgameComponent implements OnInit {
     
     this.gameOver = false;
     this.disabledButtons = [false, false, false, false, false, false];
+    this.playerCardsPlayed = [];
+    this.computerCardsPlayed = [];
    }
 
   

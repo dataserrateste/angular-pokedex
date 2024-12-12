@@ -160,4 +160,27 @@ export class CardsgameComponent implements OnInit {
     }
     return indice;
   }
+
+
+
+  onMouseMove(event: MouseEvent, card: HTMLElement): void {
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * 10; // Rotação no eixo X
+    const rotateY = ((x - centerX) / centerX) * -10; // Rotação no eixo Y
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  }
+
+  onMouseLeave(card: HTMLElement): void {
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    card.style.setProperty('--mouse-x', '50%');
+    card.style.setProperty('--mouse-y', '50%');
+  }
 }

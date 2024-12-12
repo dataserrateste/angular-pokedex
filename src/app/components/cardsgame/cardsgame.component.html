@@ -10,8 +10,8 @@
     </div>
     <div class="playedCards" *ngIf="playerCardsPlayed.length > 0">
       <p>CARTAS JOGADAS</p>
-      <div *ngFor="let card of playerCardsPlayed">
-        <app-cardsgame-frontcard class="pCcard" [infoCard]="card"></app-cardsgame-frontcard>
+      <div class="pCcard" *ngFor="let card of playerCardsPlayed">
+        <app-cardsgame-frontcard  [infoCard]="card"></app-cardsgame-frontcard>
       </div>
     </div>
   </div>
@@ -73,8 +73,8 @@
     </div>
     <div class="playedCards" *ngIf="playerCardsPlayed.length > 0">
       <p>CARTAS JOGADAS</p>
-      <div *ngFor="let card of computerCardsPlayed">
-        <app-cardsgame-frontcard class="pCcard" [infoCard]="card"></app-cardsgame-frontcard>
+      <div class="pCcard" *ngFor="let card of computerCardsPlayed">
+        <app-cardsgame-frontcard  [infoCard]="card"></app-cardsgame-frontcard>
       </div>
     </div>
   </div>

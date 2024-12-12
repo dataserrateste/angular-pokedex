@@ -42,6 +42,8 @@
   line-height: 30px; /* Centraliza o texto verticalmente */
 }
 
+
+
 .game__info{
   margin-top: 10px;
   background: rgb(37,83,144);
@@ -49,15 +51,15 @@
       rgba(37,83,144,1) 0%, 
       rgba(37,83,144,1) 40%, 
       rgba(31,77,139,1) 42%, 
-      rgba(36,36,36,1) 46%,
+      rgba(36,36,36,1) 48%,
       rgba(36,36,36,1) 50%, 
-      rgba(36,36,36,1) 54%, 
+      rgba(36,36,36,1) 52%, 
       rgba(164,42,38,1) 58%, 
       rgba(174,52,48,1) 60%, 
       rgba(174,52,48,1) 100%);
   width: 60%;
   height: 88vh;
-  border: 20px solid rgb(43, 43, 43);
+  border: 15px solid #333333;
   border-radius: 30px;
 }
 
@@ -66,7 +68,7 @@
   background-position: center;
   background-size: 400px;
   background-repeat: no-repeat;
-  height: 85vh;
+  height: 88vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -75,16 +77,31 @@
 
 .card-box {
   width: 79%;
-  margin-top: -1.1rem;
   padding: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: rgb(43, 43, 43);
+  /* background-color: rgb(43, 43, 43); */
+  background: rgb(27,27,27);
+  background: linear-gradient(180deg, rgba(27,27,27,1) 0%, rgba(61,61,61,1) 25%, rgba(107,107,107,1) 50%, rgba(61,61,61,1) 75%, rgba(27,27,27,1) 100%);
   border-radius: 20px;
+  border: 8px solid rgb(104, 104, 104);
   gap: 15px;
+ 
 }
+
+#computer-cards{
+  position: relative;
+  top: -12px;
+}
+
+#player-cards{
+  position: relative;
+  bottom: 18px;
+}
+
+
 
 .duel__container{
   height: 40%;
@@ -150,13 +167,18 @@
   }
 
   .pCcard .container{
-    transform: scale(0.375); /* Reduz o tamanho para 80% */
-    transform-origin: top left; /* Define o ponto de origem para o escalonamento */
+    transform: scale(0.375); 
+    transform-origin: top left; 
   }
 
   .pcard .container{
-    transform: scale(0.675); /* Reduz o tamanho para 80% */
+    transform: scale(0.685); /* Reduz o tamanho para 80% */
     transform-origin: top left; /* Define o ponto de origem para o escalonamento */
+  }
+
+  .pCcard{
+    height: 96px;
+    width: 77px;
   }
 
   .pcard{

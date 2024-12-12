@@ -1,48 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&display=swap');
+
 .container {
   position: relative;
   display: flex;
   justify-content: space-between;
+  font-family: "Press Start 2P", cursive;
 }
 
 .player__info{
   width: 280px;
-  height: 500px;
+  height: 88vh;
   margin-top: 10px;
-  margin-left: 40px;
-  background-color: grey;
+  margin-left: 20px;
+  /* background-color: rgb(37, 83, 144); */
+  background: rgb(67,143,245);
+  background: linear-gradient(305deg, rgba(67,143,245,1) 0%, rgba(37,83,144,1) 30%, rgba(37,83,144,1) 70%, rgba(3,32,70,1) 100%);
   text-align: center;
   border-radius: 20px;
-  border: 2px solid rgb(59, 59, 59);
+  border: 10px solid rgb(59, 59, 59);
+}
+
+.player__info > h2, .player__info > p{
+  font-family: "Press Start 2P", cursive;
+  color: rgb(241, 241, 241);
+  margin-top: 20px;
 }
 
 .computer__info{
   width: 280px;
-  height: 500px;
+  height: 88vh;
   margin-top: 10px;
-  margin-right: 40px;
-  background-color: grey;
+  margin-right: 20px;
+  /* background-color: rgb(174, 52, 48); */
+  background: rgb(250,88,82);
+  background: linear-gradient(305deg, rgba(250,88,82,1) 0%, rgba(174,52,48,1) 30%, rgba(174,52,48,1) 70%, rgba(101,8,5,1) 100%);
   text-align: center;
   border-radius: 20px;
-  border: 2px solid rgb(59, 59, 59);
+  border: 10px solid rgb(59, 59, 59);
+}
+
+.computer__info > h2, .computer__info > p{
+  font-family: "Press Start 2P", cursive;
+  color: rgb(241, 241, 241);
+  margin-top: 20px;
 }
 
 .life-bar {
   width: 250px;
   background-color: #ccc;
   border: 1px solid #000;
-  height: 30px;
+  height: 20px;
+  margin: 0 auto;
   position: relative;
+  border-radius: 10px;
 }
 
 .life-atual {
   height: 100%;
-  background-color: green;
+  background: rgb(100,246,162);
+  background: linear-gradient(0deg, rgba(100,246,162,1) 0%, rgba(21,242,112,1) 30%, rgba(21,242,112,1) 70%, rgba(0,157,65,1) 100%);
   text-align: center;
   color: white;
+  border-radius: 10px;
   line-height: 30px; /* Centraliza o texto verticalmente */
 }
 
+.playedCards > p{
+  font-family: "Press Start 2P", cursive;
+  color: rgb(241, 241, 241);
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
 
+.group__playedCards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
 
 .game__info{
   margin-top: 10px;
@@ -51,10 +86,10 @@
       rgba(37,83,144,1) 0%, 
       rgba(37,83,144,1) 40%, 
       rgba(31,77,139,1) 42%, 
-      rgba(36,36,36,1) 48%,
+      rgba(36,36,36,1) 44%,
       rgba(36,36,36,1) 50%, 
       rgba(36,36,36,1) 52%, 
-      rgba(164,42,38,1) 58%, 
+      rgba(164,42,38,1) 54%, 
       rgba(174,52,48,1) 60%, 
       rgba(174,52,48,1) 100%);
   width: 60%;
@@ -77,14 +112,19 @@
 
 .card-box {
   width: 79%;
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   /* background-color: rgb(43, 43, 43); */
   background: rgb(27,27,27);
-  background: linear-gradient(180deg, rgba(27,27,27,1) 0%, rgba(61,61,61,1) 25%, rgba(107,107,107,1) 50%, rgba(61,61,61,1) 75%, rgba(27,27,27,1) 100%);
+  background: linear-gradient(180deg, 
+        rgba(27,27,27,1) 0%, 
+        rgba(61,61,61,1) 25%, 
+        rgba(107,107,107,1) 50%, 
+        rgba(61,61,61,1) 75%, 
+        rgba(27,27,27,1) 100%);
   border-radius: 20px;
   border: 8px solid rgb(104, 104, 104);
   gap: 15px;
@@ -106,6 +146,7 @@
 .duel__container{
   height: 40%;
   width: 100%;
+  margin-top: -30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,28 +162,33 @@
   
 .button {
   font-weight: bold;
-  font-size: large;
-  text-align: center;
   width: 120px;
   height: 60px;
   color: black;
-  padding: 0 0px;
-  background: lightblue;
+  margin-top: 30px;
+  /* background: #add8e6; */
+  background: rgb(84,174,204);
+  background: linear-gradient(0deg, rgba(84,174,204,1) 0%, rgba(84,174,204,1) 49%, rgba(131,196,218,1) 51%, rgba(173,216,230,1) 100%);
   border: 3px solid #003060;
   border-radius: 40px;
-  box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 5px 20px 3px #00000099;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.7rem;
+  line-height: 1.5;
 }
 
 .button:hover{
-  background: #003060;
+  /* background: #003060; */
+  background: rgb(0,48,96);
+  background: linear-gradient(0deg, rgba(0,48,96,1) 0%, rgba(0,48,96,1) 49%, rgba(0,65,129,1) 51%, rgba(0,65,129,1) 100%);
   border: 3px solid lightblue;
   color: white;
 }
 
 .button:disabled{
-  background: #ff01b3;
+  background: #b6b6b6;
   border: none;
-  color: black;
+  color: rgb(145, 145, 145);
 }
   
   .versus-top,
@@ -158,8 +204,8 @@
   }
   
   .card {
-    height: 175px;
-    width: 140px;
+    height: 153px;
+    width: 124px;
     transition: all 0.2s;
     cursor: pointer;
     border: 7px solid rgb(211, 160, 66);
@@ -167,23 +213,23 @@
   }
 
   .pCcard .container{
-    transform: scale(0.375); 
+    transform: scale(0.475); 
     transform-origin: top left; 
   }
 
   .pcard .container{
-    transform: scale(0.685); /* Reduz o tamanho para 80% */
+    transform: scale(0.6); /* Reduz o tamanho para 80% */
     transform-origin: top left; /* Define o ponto de origem para o escalonamento */
   }
 
   .pCcard{
-    height: 96px;
-    width: 77px;
+    height: 122px;
+    width: 100px;
   }
 
   .pcard{
-    height: 175px;
-    width: 140px;
+    height: 153px;
+    width: 124px;
   }
 
   .pcard:hover {

@@ -2,16 +2,18 @@
 
   <!--INFO PLAYER-->
   <div class="player__info">
-    <p>PLAYER</p>
+    <h2>Player</h2>
+    <p>HP: {{ score.playerScore }}/250</p>
     <div class="life-bar">
       <div class="life-atual" [style.width]="vidaPercentage.player +'px'" >
-        {{ vidaPercentage.player }}
       </div>
     </div>
     <div class="playedCards" *ngIf="playerCardsPlayed.length > 0">
       <p>CARTAS JOGADAS</p>
-      <div class="pCcard" *ngFor="let card of playerCardsPlayed">
-        <app-cardsgame-frontcard  [infoCard]="card"></app-cardsgame-frontcard>
+      <div class="group__playedCards">
+        <div class="pCcard" *ngFor="let card of playerCardsPlayed">
+          <app-cardsgame-frontcard [infoCard]="card"></app-cardsgame-frontcard>
+        </div>
       </div>
     </div>
   </div>
@@ -65,16 +67,18 @@
 
   <!--INFO COMPUTER-->
   <div class="computer__info">
-    <p>Computer: {{ score.computerScore }}</p>
+    <h2>Computer</h2>
+    <p>HP: {{ score.computerScore }}/250</p>
     <div class="life-bar">
       <div class="life-atual" [style.width]="vidaPercentage.computer +'px'" >
-        {{ vidaPercentage.computer }}
       </div>
     </div>
     <div class="playedCards" *ngIf="playerCardsPlayed.length > 0">
       <p>CARTAS JOGADAS</p>
-      <div class="pCcard" *ngFor="let card of computerCardsPlayed">
-        <app-cardsgame-frontcard  [infoCard]="card"></app-cardsgame-frontcard>
+      <div class="group__playedCards">
+        <div class="pCcard" *ngFor="let card of computerCardsPlayed">
+          <app-cardsgame-frontcard  [infoCard]="card"></app-cardsgame-frontcard>
+        </div>
       </div>
     </div>
   </div>

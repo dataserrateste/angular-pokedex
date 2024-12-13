@@ -14,10 +14,6 @@ interface Card {
   styleUrls: ['./memorygame.component.css']
 })
 export class MemoryGameComponent implements OnInit {
-  // emojis: string[] = [
-  //   "🍕", "🍕", "🍔", "🍔", "🌭", "🌭", "🍗", "🍗", 
-  //   "🍩", "🍩", "🍰", "🍰", "🍟", "🍟", "🥪", "🥪"
-  // ];
 
   pokemon: PokemonData = new PokemonData;
   emojis: string[] = [];

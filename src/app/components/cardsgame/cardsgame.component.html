@@ -20,7 +20,17 @@
 
   <!--INFO GAME-->
   <div class="game__info">
-    <div class="game__info__playing" *ngIf="!gameOver">
+    <div class="game__info__manual mensagem" *ngIf="!isPlaying">
+      <h1>Cards Game</h1>
+      <p>Instruções:<br><br>
+        1 - Escolha um atributo para comparação.<br>
+        2 - Escolha a carta a ser jogada.<br>
+        3 - Para ir ao próximo round, aperte no botão com o resultado da partida.<br><br>
+        * - Só é possível escolher o atributo apenas uma vez, escolha com sabedoria!
+      </p>
+      <button class="button" (click)="init()">INICIAR O GAME</button>
+    </div>
+    <div class="game__info__playing" *ngIf="!gameOver && isPlaying">
 
       <!--CARTAS DO COMPUTER-->
       <div class="card-box" id="computer-cards">
@@ -63,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="resultado" *ngIf="gameOver">
+    <div class="resultado mensagem" *ngIf="gameOver">
       <p>{{ resultado }}</p>
       <button class="button" (click)="init()">REINICIAR O GAME</button>
     </div>

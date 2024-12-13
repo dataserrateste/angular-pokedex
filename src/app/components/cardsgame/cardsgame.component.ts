@@ -31,13 +31,14 @@ export class CardsgameComponent implements OnInit {
   gameOver: boolean = false;
   vidaPercentage = { player: this.score.playerScore, computer: this.score.computerScore }; // Para a largura da barra de vida
   resultado: string = '';
+  isPlaying: boolean = false;
 
 
 
   constructor(private service: PokemonService) {}
   
   ngOnInit() {
-    this.init();
+    // this.init();
   }
 
   /** Inicializa o jogo */
@@ -53,6 +54,7 @@ export class CardsgameComponent implements OnInit {
     this.score.computerScore = 250;
     this.vidaPercentage.player = this.score.playerScore;
     this.vidaPercentage.computer = this.score.computerScore;
+    this.isPlaying = true;
    }
 
   

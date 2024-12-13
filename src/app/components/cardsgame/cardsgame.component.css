@@ -112,7 +112,7 @@
 }
 
 .card-box {
-  width: 79%;
+  width: 720px;
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -204,8 +204,8 @@
   }
   
   .card {
-    height: 153px;
-    width: 124px;
+    height: 152px;
+    width: 122px;
     transition: all 0.2s;
     cursor: pointer;
     border: 7px solid rgb(211, 160, 66);
@@ -225,11 +225,12 @@
   .pCcard{
     height: 122px;
     width: 100px;
+    
   }
 
   .pcard{
-    height: 153px;
-    width: 124px;
+    height: 152px;
+    width: 122px;
   }
 
   .pcard:hover {
@@ -250,7 +251,7 @@
     /*opacity: 0.5; ---- Indica visualmente que está desativada */
   }
 
-  .resultado {
+  .mensagem {
     position: absolute;  /* Posiciona a div em relação ao container */
     top: 50%;            /* Move para o meio verticalmente */
     left: 50%;           /* Move para o meio horizontalmente */
@@ -270,6 +271,29 @@
     border: 10px solid #303030;
   }
   
+  .game__info__manual>h1{
+
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 2em;
+    /* color: #383838; */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #F6C206;
+    -webkit-text-stroke-width: 1px;
+    /* largura da borda */
+    -webkit-text-stroke-color: #4161AD;
+    /* cor da borda */
+    margin-bottom: 30px;
+  }
+
+  .game__info__manual>p {
+    font-size: 1em;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: "Press Start 2P", cursive;
+    color: #303030;
+  }
+
   .resultado>p {
     font-size: 2em;
     text-align: center;
@@ -278,7 +302,7 @@
     color: #303030;
   }
 
-  .resultado > button {
+  .mensagem > button {
     width: 250px;
     padding: 5px;
   }

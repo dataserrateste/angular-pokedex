@@ -30,6 +30,7 @@ export class CardsgameComponent implements OnInit {
   disabledButtons: boolean[] = [false, false, false, false, false, false];
   gameOver: boolean = false;
   vidaPercentage = { player: this.score.playerScore, computer: this.score.computerScore }; // Para a largura da barra de vida
+  resultado: string = '';
 
 
 
@@ -48,6 +49,10 @@ export class CardsgameComponent implements OnInit {
     this.disabledButtons = [false, false, false, false, false, false];
     this.playerCardsPlayed = [];
     this.computerCardsPlayed = [];
+    this.score.playerScore = 250;
+    this.score.computerScore = 250;
+    this.vidaPercentage.player = this.score.playerScore;
+    this.vidaPercentage.computer = this.score.computerScore;
    }
 
   
@@ -89,13 +94,40 @@ export class CardsgameComponent implements OnInit {
   }
 
   /** Atualiza o placar */
+  // updateScore() {
+  //   if (this.duelResult === 'win') {
+  //     this.score.computerScore-= 50;
+  //     this.vidaPercentage.computer = this.score.computerScore;
+  //   } else if (this.duelResult === 'lose') {
+  //     this.score.playerScore-=50;
+  //     this.vidaPercentage.player = this.score.playerScore;
+  //   }
+  // }
+
   updateScore() {
+    const decrementGradually = (currentScore: number, targetScore: number, updateCallback: (value: number) => void) => {
+      const interval = setInterval(() => {
+        if (currentScore > targetScore) {
+          currentScore -= 1;
+          updateCallback(currentScore);
+        } else {
+          clearInterval(interval);
+        }
+      }, 30); // Intervalo de 20ms para um efeito mais fluido
+    };
+  
     if (this.duelResult === 'win') {
-      this.score.computerScore-= 50;
-      this.vidaPercentage.computer = this.score.computerScore;
+      const targetScore = this.score.computerScore - 50;
+      decrementGradually(this.score.computerScore, targetScore, (newScore) => {
+        this.score.computerScore = newScore;
+        this.vidaPercentage.computer = newScore;
+      });
     } else if (this.duelResult === 'lose') {
-      this.score.playerScore-=50;
-      this.vidaPercentage.player = this.score.playerScore;
+      const targetScore = this.score.playerScore - 50;
+      decrementGradually(this.score.playerScore, targetScore, (newScore) => {
+        this.score.playerScore = newScore;
+        this.vidaPercentage.player = newScore;
+      });
     }
   }
 
@@ -117,12 +149,19 @@ export class CardsgameComponent implements OnInit {
     const button = this.nextDuelButton.nativeElement;
     button.style.display = 'none';
     this.checkStatusGame();
-    console.log(this.gameOver);
   }
 
   checkStatusGame(){
-    if(this.playerCards.length == 0)
+    if(this.playerCards.length == 0){
       this.gameOver = true
+
+      if(this.score.playerScore > this.score.computerScore)
+        this.resultado = 'Parabéns! Você venceu!';
+      else if(this.score.computerScore > this.score.playerScore)
+        this.resultado = 'Não foi dessa vez! Tente novamente!';
+      else
+        this.resultado = 'O jogo terminou empatado!';
+    }
   }
 
 
@@ -163,24 +202,24 @@ export class CardsgameComponent implements OnInit {
 
 
 
-  onMouseMove(event: MouseEvent, card: HTMLElement): void {
-    const rect = card.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+  // onMouseMove(event: MouseEvent, card: HTMLElement): void {
+  //   const rect = card.getBoundingClientRect();
+  //   const x = event.clientX - rect.left;
+  //   const y = event.clientY - rect.top;
+  //   const centerX = rect.width / 2;
+  //   const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * 10; // Rotação no eixo X
-    const rotateY = ((x - centerX) / centerX) * -10; // Rotação no eixo Y
+  //   const rotateX = ((y - centerY) / centerY) * 10; // Rotação no eixo X
+  //   const rotateY = ((x - centerX) / centerX) * -10; // Rotação no eixo Y
 
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-  }
+  //   card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  //   card.style.setProperty('--mouse-x', `${x}px`);
+  //   card.style.setProperty('--mouse-y', `${y}px`);
+  // }
 
-  onMouseLeave(card: HTMLElement): void {
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    card.style.setProperty('--mouse-x', '50%');
-    card.style.setProperty('--mouse-y', '50%');
-  }
+  // onMouseLeave(card: HTMLElement): void {
+  //   card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  //   card.style.setProperty('--mouse-x', '50%');
+  //   card.style.setProperty('--mouse-y', '50%');
+  // }
 }

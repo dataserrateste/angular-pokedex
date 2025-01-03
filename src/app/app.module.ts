@@ -27,6 +27,7 @@ import { GameCardComponent } from './components/game-card/game-card.component';
 import { GameCardsComponent } from './pages/game-cards/game-cards.component';
 import { CardsgameComponent } from './components/cardsgame/cardsgame.component';
 import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/cardsgame-frontcard.component';
+import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
 
 
 
@@ -53,7 +54,8 @@ import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/ca
     GameCardComponent,
     GameCardsComponent,
     CardsgameComponent,
-    CardsgameFrontcardComponent
+    CardsgameFrontcardComponent,
+    PokeDetailsComponent
   ],
   imports: [
     BrowserModule,

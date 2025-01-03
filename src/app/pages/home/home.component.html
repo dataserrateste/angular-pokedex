@@ -9,7 +9,9 @@
 
     <div class="card__container__pokemon">
         <div class="card__pokemon" *ngFor="let number of pokemonService.displayed">
-            <app-poke-card index={{number}}></app-poke-card>
+            <a routerLink="/pokemon-details" [queryParams]="{ number: number }">
+                <app-poke-card index={{number}}></app-poke-card>
+            </a>
         </div>
     </div>
     <!-- <div class="card__carregar__pokemon">

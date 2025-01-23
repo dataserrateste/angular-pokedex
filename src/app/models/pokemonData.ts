@@ -2,14 +2,23 @@ export class PokemonData {
   id: number;
   species: {
     name: string;
+    url: string;
   };
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    }
+    is_hidden: boolean;
+    slot: number;
+  }[];
   sprites: {
     front_default: string;
     other: {
       "official-artwork": {
         front_default: string;
       };
-      home:{
+      home: {
         front_default: string;
       };
     };
@@ -30,21 +39,27 @@ export class PokemonData {
     };
   }[];
 
+
   constructor() {
     this.id = 0;
-    this.species = { name: '' };
+    this.species = {
+      name: '',
+      url: ''
+    };
+    this.abilities = [];
     this.sprites = {
       front_default: '',
       other: {
         "official-artwork": {
           front_default: '',
         },
-        home:{
+        home: {
           front_default: '',
         },
       },
     };
     this.stats = [];
     this.types = [];
+
   }
 }

@@ -4,6 +4,7 @@ import { TypeData } from '../../models/typeData';
 import { EvolutionChainData } from '../../models/evolutionChainData';
 import { PokemonService } from '../../services/pokemon.service';
 import { forkJoin, switchMap } from 'rxjs';
+import { MoveData } from '../../models/moveData';
 
 @Component({
   selector: 'app-poke-details',
@@ -11,12 +12,12 @@ import { forkJoin, switchMap } from 'rxjs';
   styleUrl: './poke-details.component.css'
 })
 export class PokeDetailsComponent {
-
   pokemon: PokemonData = new PokemonData();
   types: TypeData[] = [];
   evolutionChain: EvolutionChainData = new EvolutionChainData();
   evolutions: EvolutionChainData[] = [];
   evolutionChainURL: string = '';
+  type: TypeData = new TypeData;
 
   @Input()
   index: string = '';
@@ -34,6 +35,7 @@ export class PokeDetailsComponent {
         console.log('Dados do Pokémon:', this.pokemon); // Log para verificar os dados do Pokémon
         this.getType(this.getTypeNames());
         this.getSpecies();
+        this.getMovesDetails(); // Buscar detalhes dos movimentos
       },
       error: (err) => console.error('Pokemon not found:', err),
     });
@@ -61,6 +63,41 @@ export class PokeDetailsComponent {
     }
   }
 
+  getMovesDetails() {
+    const moveRequests = this.pokemon.moves.map((m) =>
+      this.service.getMove(m.move.name)
+    );
+  
+    forkJoin(moveRequests).subscribe({
+      next: (moveDetails) => {
+        const typeRequests = moveDetails.map((move) =>
+          this.service.getType(move.type.name) // Busca os dados do tipo
+        );
+  
+        forkJoin(typeRequests).subscribe({
+          next: (typeDetails) => {
+            // Associa os dados do move e do tipo
+            this.pokemon.moves = this.pokemon.moves.map((m, index) => ({
+              ...m,
+              details: {
+                ...Object.assign(new MoveData(), moveDetails[index]),
+                type: {
+                  ...moveDetails[index].type,
+                  typeImage: Object.assign(new TypeData(), typeDetails[index]),
+                },
+              },
+            }));
+            console.log('Detalhes dos Moves com Tipo:', this.pokemon.moves); // Verificar no console
+          },
+          error: (err) =>
+            console.error('Erro ao buscar detalhes dos tipos:', err),
+        });
+      },
+      error: (err) => console.error('Erro ao buscar detalhes dos moves:', err),
+    });
+  }
+
+
   getEvolution(evolution: EvolutionChainData): EvolutionChainData[] {
     const evolutions: EvolutionChainData[] = [];
 
@@ -79,7 +116,7 @@ export class PokeDetailsComponent {
     return evolutions;
   }
 
-  getType(searchNames: string[]) {
+    getType(searchNames: string[]) {
     const typeRequests = searchNames.map((name) =>
       this.service.getType(name)
     );
@@ -97,8 +134,26 @@ export class PokeDetailsComponent {
     return this.pokemon.types.map((t) => t.type.name);
   }
 
+  
+
   getPokemonIdFromUrl(url: string): string {
     const parts = url.split('/');
     return parts[parts.length - 2]; // Obtém o penúltimo segmento da URL
   }
+  groupLearnMethods(details: any[]): { method: string; details: any[] }[] {
+    const grouped = details.reduce((acc, detail) => {
+      const method = detail.move_learn_method.name;
+      if (!acc[method]) {
+        acc[method] = [];
+      }
+      acc[method].push(detail);
+      return acc;
+    }, {} as { [method: string]: any[] });
+  
+    return Object.keys(grouped).map((method) => ({
+      method,
+      details: grouped[method],
+    }));
+  }
+
 }

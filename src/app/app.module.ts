@@ -9,7 +9,6 @@ import { PokeCardComponent } from './components/poke-card/poke-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { HomeComponent } from './pages/home/home.component';
 import { MovesComponent } from './pages/moves/moves.component';
 import { ItensComponent } from './pages/itens/itens.component';
@@ -29,6 +28,8 @@ import { GameCardsComponent } from './pages/game-cards/game-cards.component';
 import { CardsgameComponent } from './components/cardsgame/cardsgame.component';
 import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/cardsgame-frontcard.component';
 import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -63,6 +64,7 @@ import { PokeDetailsComponent } from './components/poke-details/poke-details.com
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     MatExpansionModule
   ],
   providers: [

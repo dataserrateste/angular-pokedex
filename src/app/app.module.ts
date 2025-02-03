@@ -30,6 +30,8 @@ import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/ca
 import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ReplaceHyphenPipe } from './pipes/replace-hyphen.pipe';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 
 
@@ -57,7 +59,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     GameCardsComponent,
     CardsgameComponent,
     CardsgameFrontcardComponent,
-    PokeDetailsComponent
+    PokeDetailsComponent,
+    ReplaceHyphenPipe,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

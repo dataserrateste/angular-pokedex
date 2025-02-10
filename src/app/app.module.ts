@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ReplaceHyphenPipe } from './pipes/replace-hyphen.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { GroupByStagePipe } from './pipes/group-by-stage.pipe';
 
 
 
@@ -61,7 +62,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     CardsgameFrontcardComponent,
     PokeDetailsComponent,
     ReplaceHyphenPipe,
-    CapitalizePipe
+    CapitalizePipe,
+    GroupByStagePipe
   ],
   imports: [
     BrowserModule,

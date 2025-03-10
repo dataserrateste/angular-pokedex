@@ -72,6 +72,9 @@
 
           <!-- Detalhes da Evolução -->
           <div class="pokedetails__evolution__method" *ngIf="evolution.details && evolution.details.length > 0">
+            <div>
+              <img src="../../../assets/images/seta-direita.png" alt="seta-direita" />
+            </div>
             <div *ngFor="let detail of evolution.details">
               <p *ngIf="detail.trigger?.name === 'trade'">{{ detail.trigger.name | titlecase }}</p>
               <p *ngIf="detail.min_level">Level {{ detail.min_level }}</p>
@@ -139,7 +142,8 @@
             <div class="pokedetails__moves__learned__games">
 
               <div class="pokedetails__moves__learned__games__detail" *ngFor="let detail of group.details" >
-                  <!-- [ngClass]="getGameClass(detail.version_group.name)" -->
+              <!-- [ngClass]="getGameClass(detail.version_group.name)" -->
+              
                 <p> {{ detail.version_group.name | titlecase | replaceHyphen | capitalize}}</p>
                 <p *ngIf="detail.level_learned_at!=0">Level: {{ detail.level_learned_at }}</p>
               </div>

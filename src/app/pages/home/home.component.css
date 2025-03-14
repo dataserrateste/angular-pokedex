@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+
 .menu-container{
     display: flex;
     justify-content: center;
@@ -32,4 +34,26 @@
 
 a {
     text-decoration: none;
+}
+
+.card__search__pokemon{
+background-color: red;
+padding-left: 10px;
+    border: 2px solid red;
+    border-radius: 15px;
+}
+
+.card__search__pokemon> label{
+color: #eee;
+font-size: 20px;
+
+}
+
+.card__search__pokemon>input{
+    padding: 15px;
+    border: none;
+    margin-left: 10px;
+    width: 350px;
+    border-radius: 15px;
+    outline: none;
 }

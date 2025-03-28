@@ -1,0 +1,15 @@
+1 - Criação de login (e-mail, senha e conexão com gmail)
+2 - Criação tela de registro
+3 - Salvar pontuação de games
+4 - Tela de pokemon favoritos
+5 - Criação de página para troca de pokemon
+6 - Leaderboard
+7 - Perfil
+8 - Jogos novos (quem é esse pokemon?, etc)
+9 - Melhorias nos detalhes dos Moves e Itens
+10 - Criação de Deck de cartas para o usuário utilizar no cardsgame ( receber cartas ao registrar, logar, etc)
+11 - Integrar Cardgame com IA
+
+
+
+* - Contratar advogados para o processo da Nintendo

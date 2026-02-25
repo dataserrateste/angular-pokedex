@@ -13,7 +13,7 @@ export class MoveCardComponent {
   // type: TypeData = new TypeData;
 
 
-  constructor(private service: PokemonService) {}
+  constructor(private service: PokemonService) { }
 
 
   @Input()
@@ -29,7 +29,7 @@ export class MoveCardComponent {
         this.move = Object.assign(new MoveData(), res);
 
         // Verifica e trata os `effect_entries` para evitar inconsistências
-        if (!this.move.effect_entries[0]) {
+        if (!this.move.effect_entries || this.move.effect_entries.length === 0) {
           this.move.effect_entries = [
             {
               effect: 'No effect available',
@@ -37,6 +37,8 @@ export class MoveCardComponent {
             }
           ];
         }
+
+
 
         // Atualiza o `typeImage` no objeto `move` com as informações do tipo
         this.getType(this.move.type.name);

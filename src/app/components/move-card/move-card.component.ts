@@ -28,19 +28,20 @@ export class MoveCardComponent {
       next: (res) => {
         this.move = Object.assign(new MoveData(), res);
 
-        // Verifica e trata os `effect_entries` para evitar inconsistências
-        if (!this.move.effect_entries || this.move.effect_entries.length === 0) {
-          this.move.effect_entries = [
-            {
-              effect: 'No effect available',
-              short_effect: 'No effect available'
-            }
-          ];
+        // Filtra apenas efeito em inglês
+        const englishEffect = this.move.effect_entries.find(
+          entry => (entry as any).language?.name === 'en'
+        );
+
+        if (englishEffect) {
+          this.move.effect_entries = [englishEffect];
+        } else {
+          this.move.effect_entries = [{
+            effect: 'No effect available',
+            short_effect: 'No effect available'
+          }];
         }
 
-
-
-        // Atualiza o `typeImage` no objeto `move` com as informações do tipo
         this.getType(this.move.type.name);
       },
       error: (err) => console.error('Move not found', err)
